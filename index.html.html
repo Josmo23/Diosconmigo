@@ -21,23 +21,23 @@
 
         header {
             text-align: center;
-            padding: 44px 22px 22px; /* Aumentado 10% */
+            padding: 44px 22px 22px; /* Letra y espacios aumentados 10% */
         }
 
         h1 {
             font-family: 'Lora', serif;
             color: #5d4037;
-            font-size: 2.75rem; /* Aumentado de 2.5 a 2.75 */
+            font-size: 2.75rem; 
             margin-bottom: 11px;
         }
 
         p.subtitle {
-            font-size: 1.21rem; /* Aumentado de 1.1 a 1.21 */
+            font-size: 1.21rem; 
             color: #795548;
         }
 
         .container {
-            max-width: 880px; /* Aumentado 10% */
+            max-width: 880px; 
             width: 90%;
             margin: 0 auto;
             text-align: center;
@@ -45,7 +45,7 @@
 
         .emotions-grid {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(132px, 1fr)); /* Aumentado 10% */
+            grid-template-columns: repeat(auto-fit, minmax(132px, 1fr)); 
             gap: 16px;
             margin-bottom: 44px;
         }
@@ -55,7 +55,7 @@
             border: 2px solid #bcaaa4;
             border-radius: 33px;
             padding: 13px 22px;
-            font-size: 1.1rem; /* Aumentado de 1 a 1.1 */
+            font-size: 1.1rem; 
             font-family: 'Montserrat', sans-serif;
             color: #5d4037;
             cursor: pointer;
@@ -82,7 +82,7 @@
 
         .verse-text {
             font-family: 'Lora', serif;
-            font-size: 1.54rem; /* Aumentado de 1.4 a 1.54 */
+            font-size: 1.54rem; 
             font-style: italic;
             color: #4e342e;
             margin-bottom: 16px;
@@ -93,11 +93,11 @@
             font-weight: 600;
             color: #795548;
             margin-bottom: 33px;
-            font-size: 1.21rem; /* Aumentado de 1.1 a 1.21 */
+            font-size: 1.21rem; 
         }
 
         .reflection-text {
-            font-size: 1.15rem; /* Aumentado de 1.05 a 1.15 */
+            font-size: 1.15rem; 
             color: #555;
             line-height: 1.6;
             margin-bottom: 10px;
@@ -109,7 +109,7 @@
             margin-top: 44px;
             font-family: 'Lora', serif;
             color: #8d6e63;
-            font-size: 1rem; /* Aumentado de 0.9 a 1.0 */
+            font-size: 1rem; 
             text-align: center;
             padding-bottom: 33px;
         }
@@ -123,7 +123,7 @@
     </header>
 
     <div class="container">
-        <p style="margin-bottom: 22px; font-size: 1.1rem; color: #5d4037;">¿Cómo te sientes en este momento?</p>
+        <p style="margin-bottom: 22px; font-size: 1.21rem; color: #5d4037;">¿Cómo te sientes en este momento?</p>
         
         <div class="emotions-grid">
             <button class="btn-emotion btn-feliz" onclick="showVerse('feliz')">Feliz 😊</button>
@@ -147,17 +147,354 @@
     </div>
 
     <script>
-        // Funciones auxiliares para generar variaciones de versículos y completar los 50 por categoría.
-        // Debido al volumen, combinamos versículos literales con promesas bíblicas directas sobre el sentimiento.
-        
-        const db = {
-            feliz: {
-                reflection: "Dios se regocija inmensamente en tu alegría. Reconocer que cada momento de felicidad es un regalo Suyo nos permite vivir con un corazón plenamente agradecido. Celebra hoy Su bondad y descansa en Su amor.",
-                verses: [
-                    { text: "Este es el día que el Señor ha hecho. ¡Nos alegraremos y regocijaremos en él!", ref: "Salmo 118:24" },
-                    { text: "Estén siempre llenos de alegría en el Señor. Lo repito, ¡alégrense!", ref: "Filipenses 4:4" },
-                    { text: "Nos llenamos de risa y cantamos de alegría.", ref: "Salmo 126:2" },
-                    { text: "Me mostrarás el camino de la vida; me concederás la alegría de tu presencia.", ref: "Salmo 16:11" },
-                    { text: "Les he dicho estas cosas para que se llenen de mi gozo; así es, desbordarán de gozo.", ref: "Juan 15:11" },
-                    { text: "El corazón contento alegra el rostro.", ref: "Proverbios 15:13" },
-                    { text: "Tú cambiaste mi duelo en alegre danza: me quitaste la ropa de luto y me vestiste de alegría.", ref: "Salmo 30:11" },
+        // Reflexiones por sentimiento
+        const reflections = {
+            feliz: "Dios se regocija inmensamente en tu alegría. Reconocer que cada momento de felicidad es un regalo Suyo nos permite vivir con un corazón plenamente agradecido. Celebra hoy Su bondad.",
+            bendecido: "Reconocer las bendiciones de Dios nos llena de humildad y asombro. Disfruta de Su provisión y Su inmenso amor, sabiendo que Él cuida, nutre y orquesta cada detalle hermoso de tu vida.",
+            enojado: "Comprendemos que duele, y es válido sentir enojo, pero no permitas que este abrume tu corazón. Dios te invita a buscar refugio en Su calma. Respira y entrégale esa carga; Él te dará paz.",
+            ansioso: "Te escuchamos y abrazamos tu inquietud. Pero no tienes que llevar esa pesada carga solo. Cierra los ojos y entrega tus ansiedades a Dios ahora mismo. Él ya está en tu mañana cuidando de ti.",
+            solitario: "Aunque el silencio parezca grande y sientas que no hay nadie, no estás solo. Dios está sentado a tu lado en este mismo instante, abrazando cada pedazo de tu corazón. Él nunca te abandonará.",
+            triste: "Sabemos que el dolor pesa profundo en tu interior. Dios guarda con mucho amor cada una de tus lágrimas. En medio de tu tristeza, Él es tu consuelo. Confía en que Su alegría volverá a florecer."
+        };
+
+        // Base de datos de 50 versículos por sentimiento separados por '|'
+        const versesData = {
+            feliz: [
+                "Este es el día que el Señor ha hecho. ¡Nos alegraremos y regocijaremos en él!|Salmo 118:24",
+                "Estén siempre llenos de alegría en el Señor. Lo repito, ¡alégrense!|Filipenses 4:4",
+                "Nos llenamos de risa y cantamos de alegría.|Salmo 126:2",
+                "Me mostrarás el camino de la vida; me concederás la alegría de tu presencia.|Salmo 16:11",
+                "Les he dicho estas cosas para que se llenen de mi gozo; así es, desbordarán de gozo.|Juan 15:11",
+                "El corazón contento alegra el rostro; el corazón quebrantado destruye el espíritu.|Proverbios 15:13",
+                "Tú cambiaste mi duelo en alegre danza: me quitaste la ropa de luto y me vestiste de alegría.|Salmo 30:11",
+                "Ustedes vivirán con gozo y paz. Los montes y colinas cantarán.|Isaías 55:12",
+                "¡No se desalienten ni entristezcan, porque el gozo del Señor es su fuerza!|Nehemías 8:10",
+                "¡Felices los que viven así! Felices de verdad son los que tienen a Dios como el Señor.|Salmo 144:15",
+                "Deléitate en el Señor, y él te concederá los deseos de tu corazón.|Salmo 37:4",
+                "Alégrense por la esperanza segura que tenemos. Tengan paciencia en las dificultades.|Romanos 12:12",
+                "¡Que todos los habitantes de Jerusalén griten sus alabanzas con alegría!|Isaías 12:6",
+                "Gracias a ti, estaré lleno de alegría; cantaré alabanzas a tu nombre, oh Altísimo.|Salmo 9:2",
+                "Se deleitará en ti con alegría... Se gozará por ti con cantos de alegría.|Sofonías 3:17",
+                "El corazón alegre es una buena medicina.|Proverbios 17:22",
+                "Le pido a Dios que los llene completamente de alegría y paz.|Romanos 15:13",
+                "Que los justos canten de alegría al Señor; les corresponde a los puros alabarlo.|Salmo 33:1",
+                "Alégrense porque sus nombres están escritos en el cielo.|Lucas 10:20",
+                "Honor y majestad lo rodean; fuerza y gozo llenan su morada.|1 Crónicas 16:27",
+                "Me alegré cuando me dijeron: Vamos a la casa del Señor.|Salmo 122:1",
+                "Canten de alegría al Señor, toda la tierra.|Salmo 100:1",
+                "El gozo del Señor es nuestra fortaleza.|Nehemías 8:10",
+                "Con alegría sacaréis aguas de las fuentes de la salvación.|Isaías 12:3",
+                "Alégrense los cielos y regocíjese la tierra.|Salmo 96:11",
+                "Me gozaré y alegraré en tu misericordia.|Salmo 31:7",
+                "Hazme oír gozo y alegría, y se recrearán los huesos que has abatido.|Salmo 51:8",
+                "Los que sembraron con lágrimas, con regocijo segarán.|Salmo 126:5",
+                "Tú diste alegría a mi corazón mayor que la de ellos cuando abundaba su grano.|Salmo 4:7",
+                "Pero los justos se alegrarán; se gozarán delante de Dios.|Salmo 68:3",
+                "Regocijaos en el Señor siempre. Otra vez digo: ¡Regocijaos!|Filipenses 4:4",
+                "Alegraos, oh justos, en el Señor; en los íntegros es hermosa la alabanza.|Salmo 33:1",
+                "Cantad a Dios, cantad salmos a su nombre.|Salmo 68:4",
+                "Bienaventurado el pueblo que sabe aclamarte.|Salmo 89:15",
+                "El que es de corazón alegre tiene un banquete continuo.|Proverbios 15:15",
+                "La esperanza de los justos es alegría.|Proverbios 10:28",
+                "El hombre se alegra con la respuesta de su boca.|Proverbios 15:23",
+                "Gozaos con los que se gozan.|Romanos 12:15",
+                "La luz es sembrada para el justo, y la alegría para los rectos de corazón.|Salmo 97:11",
+                "Sacia de bien tu boca de modo que te rejuvenezcas como el águila.|Salmo 103:5",
+                "Ciertamente consolará el Señor a Sion... cambiará su desierto en paraíso.|Isaías 51:3",
+                "Has cambiado mi lamento en baile.|Salmo 30:11",
+                "Por lo cual mi corazón se alegró, y se gozó mi lengua.|Hechos 2:26",
+                "Tengo gran gozo y consolación en tu amor.|Filemón 1:7",
+                "Y el Dios de esperanza os llene de todo gozo.|Romanos 15:13",
+                "A quien amáis sin haberle visto, en quien creyendo, os alegráis con gozo inefable.|1 Pedro 1:8",
+                "No os entristezcáis, porque el gozo del Señor es vuestra fuerza.|Nehemías 8:10",
+                "Gozosos en la esperanza; sufridos en la tribulación.|Romanos 12:12",
+                "Mi alma se regocijará en mi Dios.|Isaías 61:10",
+                "Alegraos en aquel día y regocijaos, porque vuestro galardón es grande.|Lucas 6:23"
+            ],
+            bendecido: [
+                "Todo lo que es bueno y perfecto es un regalo que desciende a nosotros de parte de Dios.|Santiago 1:17",
+                "Que todo lo que soy alabe al Señor; que nunca olvide todas las cosas buenas que hace por mí.|Salmo 103:2",
+                "Entren por sus puertas con acción de gracias... Denle gracias y alaben su nombre.|Salmo 100:4",
+                "Toda la alabanza sea para Dios... quien nos ha bendecido con toda clase de bendiciones.|Efesios 1:3",
+                "Así es, Dios nos bendecirá, y gente de todo el mundo le temerá.|Salmo 67:7",
+                "Sean agradecidos en toda circunstancia, pues esta es la voluntad de Dios.|1 Tesalonicenses 5:18",
+                "Vayas donde vayas y en todo lo que hagas, serás bendito.|Deuteronomio 28:6",
+                "Y este mismo Dios suplirá todo lo que necesiten, de sus gloriosas riquezas.|Filipenses 4:19",
+                "Pero benditos son los que confían en el Señor y han hecho que Él sea su esperanza.|Jeremías 17:7",
+                "El Señor es mi pastor; tengo todo lo que necesito.|Salmo 23:1",
+                "Prueben y vean que el Señor es bueno. ¡Qué alegría para los que se refugian en él!|Salmo 34:8",
+                "Y Dios proveerá con generosidad todo lo que necesiten.|2 Corintios 9:8",
+                "La bendición del Señor enriquece a una persona y él no añade ninguna tristeza.|Proverbios 10:22",
+                "Coronas el año con una copiosa cosecha; hasta los senderos desbordan de abundancia.|Salmo 65:11",
+                "Qué grande es la bondad que has reservado para los que te temen.|Salmo 31:19",
+                "¡Derramaré una bendición tan grande que no tendrán suficiente espacio para guardarla!|Malaquías 3:10",
+                "Si Dios no se guardó ni a su propio Hijo... ¿no nos dará también todo lo demás?|Romanos 8:32",
+                "Serán como un huerto bien regado, como un manantial que nunca se seca.|Isaías 58:11",
+                "Gozarás del fruto de tu trabajo; ¡qué feliz y próspero serás!|Salmo 128:2",
+                "El Señor no negará ningún bien a quienes hacen lo que es correcto.|Salmo 84:11",
+                "Bendeciré al Señor en todo tiempo; su alabanza estará de continuo en mi boca.|Salmo 34:1",
+                "Él te bendecirá en la tierra que el Señor tu Dios te da.|Deuteronomio 28:8",
+                "Bendito el Señor, que nos colma de beneficios cada día.|Salmo 68:19",
+                "El alma generosa será prosperada.|Proverbios 11:25",
+                "Te abrirá el Señor su buen tesoro, el cielo, para enviar la lluvia a tu tierra.|Deuteronomio 28:12",
+                "Dando gracias siempre por todo al Dios y Padre.|Efesios 5:20",
+                "Bendito sea el Dios y Padre de nuestro Señor Jesucristo.|1 Pedro 1:3",
+                "Te bendeciré y engrandeceré tu nombre, y serás bendición.|Génesis 12:2",
+                "Dad, y se os dará; medida buena, apretada, remecida y rebosando.|Lucas 6:38",
+                "El que siembra generosamente, generosamente también segará.|2 Corintios 9:6",
+                "Bienaventurado el hombre que teme al Señor, y en sus mandamientos se deleita en gran manera.|Salmo 112:1",
+                "Ciertamente el bien y la misericordia me seguirán todos los días de mi vida.|Salmo 23:6",
+                "Sus misericordias son nuevas cada mañana; grande es tu fidelidad.|Lamentaciones 3:23",
+                "Te alabaré; porque formidables, maravillosas son tus obras.|Salmo 139:14",
+                "Abre tú mi mano, y se saciarán de bien.|Salmo 104:28",
+                "Él da alimento a todo ser viviente, porque para siempre es su misericordia.|Salmo 136:25",
+                "Bendice, alma mía, al Señor, y no olvides ninguno de sus beneficios.|Salmo 103:2",
+                "Él perdona todas tus iniquidades, Él sana todas tus dolencias.|Salmo 103:3",
+                "Él rescata del hoyo tu vida, te corona de favores y misericordias.|Salmo 103:4",
+                "Gustad, y ved que es bueno el Señor.|Salmo 34:8",
+                "Alabaré a Dios por su palabra; en Dios he confiado.|Salmo 56:4",
+                "Bienaventurados los que habitan en tu casa; perpetuamente te alabarán.|Salmo 84:4",
+                "Las cuerdas me cayeron en lugares deleitosos, y es hermosa la heredad que me ha tocado.|Salmo 16:6",
+                "Me guiarás por tu consejo, y después me recibirás en gloria.|Salmo 73:24",
+                "De su plenitud tomamos todos, y gracia sobre gracia.|Juan 1:16",
+                "He aquí que tú eres mi ayudador; el Señor está con los que sostienen mi vida.|Salmo 54:4",
+                "Nos ha salvado y llamado con llamamiento santo.|2 Timoteo 1:9",
+                "Bendito sea el Dios, roca mía, quien adiestra mis manos para la batalla.|Salmo 144:1",
+                "Has sido mi socorro, y a la sombra de tus alas me regocijaré.|Salmo 63:7",
+                "Cantaré al Señor, porque me ha hecho bien.|Salmo 13:6"
+            ],
+            enojado: [
+                "No pequen al dejar que el enojo los controle. No permitan que el sol se ponga mientras siguen enojados.|Efesios 4:26",
+                "La respuesta apacible desvía el enojo, pero las palabras ásperas encienden los ánimos.|Proverbios 15:1",
+                "Todos ustedes deben ser rápidos para escuchar, lentos para hablar y lentos para enojarse.|Santiago 1:19",
+                "Los que tienen entendimiento no pierden los estribos; los que se enojan fácilmente demuestran gran necedad.|Proverbios 14:29",
+                "No dejen que el mal los venza, más bien venzan el mal haciendo el bien.|Romanos 12:21",
+                "Dios bendice a los que procuran la paz, porque serán llamados hijos de Dios.|Mateo 5:9",
+                "Las personas sensatas no pierden los estribos; se ganan el respeto pasando por alto las ofensas.|Proverbios 19:11",
+                "Sean comprensivos con las faltas de los demás y perdonen a todo el que los ofenda.|Colosenses 3:13",
+                "Mejor es ser paciente que poderoso; más vale tener control propio que conquistar una ciudad.|Proverbios 16:32",
+                "El fruto que el Espíritu Santo produce es: amor, alegría, paz, paciencia... control propio.|Gálatas 5:22-23",
+                "Los necios dan rienda suelta a su enojo, pero los sabios calladamente lo controlan.|Proverbios 29:11",
+                "¡Ya no sigas enojado! ¡Deja a un lado tu ira! No pierdas los estribos, que eso únicamente causa daño.|Salmo 37:8",
+                "Controla tu carácter, porque el enojo es el distintivo de los necios.|Eclesiastés 7:9",
+                "Nunca devuelvan a nadie mal por mal. Compórtense de manera que vean que son personas honradas.|Romanos 12:17",
+                "No pequen al dejar que el enojo los controle; reflexionen durante la noche y quédense en silencio.|Salmo 4:4",
+                "Líbrense de toda amargura, furia, enojo, palabras ásperas, calumnias y mala conducta.|Efesios 4:31",
+                "Y que la paz que viene de Cristo gobierne en sus corazones.|Colosenses 3:15",
+                "Queridos hermanos, nunca tomen venganza. Dejen que sea Dios quien juzgue.|Romanos 12:19",
+                "El hombre iracundo provoca contiendas, pero el que es lento para la ira apacigua la pelea.|Proverbios 15:18",
+                "No te hagas amigo de la gente irritable... porque aprenderás a ser como ellos.|Proverbios 22:24-25",
+                "Si es posible, en cuanto dependa de vosotros, estad en paz con todos los hombres.|Romanos 12:18",
+                "No te apresures en tu espíritu a enojarte.|Eclesiastés 7:9",
+                "El amor es paciente, es bondadoso... no se irrita.|1 Corintios 13:4-5",
+                "Airaos, pero no pequéis.|Efesios 4:26",
+                "Cualquiera que se enoje contra su hermano, será culpable de juicio.|Mateo 5:22",
+                "Señor, pon guarda a mi boca; vigila la puerta de mis labios.|Salmo 141:3",
+                "El prudente encubre su enojo.|Proverbios 12:16",
+                "Como ciudad derribada y sin muro es el hombre cuyo espíritu no tiene rienda.|Proverbios 25:28",
+                "El que tarda en airarse es grande de entendimiento.|Proverbios 14:29",
+                "Quítese de vosotros toda amargura, enojo, ira, gritería y maledicencia.|Efesios 4:31",
+                "Antes sed benignos unos con otros, misericordiosos, perdonándoos unos a otros.|Efesios 4:32",
+                "Soportaos unos a otros, y perdonaos unos a otros si alguno tuviere queja contra otro.|Colosenses 3:13",
+                "El que oculta el odio tiene labios mentirosos.|Proverbios 10:18",
+                "La cordura del hombre detiene su furor.|Proverbios 19:11",
+                "Mas el Consolador, el Espíritu Santo, os enseñará todas las cosas y os recordará todo.|Juan 14:26",
+                "Apártate del mal, y haz el bien; busca la paz, y síguela.|Salmo 34:14",
+                "Perdona nuestras deudas, como también nosotros perdonamos a nuestros deudores.|Mateo 6:12",
+                "Bienaventurados los mansos, porque ellos recibirán la tierra por heredad.|Mateo 5:5",
+                "Con toda humildad y mansedumbre, soportándoos con paciencia los unos a los otros en amor.|Efesios 4:2",
+                "El que ama a su hermano, permanece en la luz.|1 Juan 2:10",
+                "Seguid la paz con todos, y la santidad.|Hebreos 12:14",
+                "No paguéis a nadie mal por mal.|Romanos 12:17",
+                "Venced el mal con el bien.|Romanos 12:21",
+                "El que es lento para la ira es mejor que el fuerte.|Proverbios 16:32",
+                "Cruel es la ira, e impetuoso el furor.|Proverbios 27:4",
+                "El que carece de entendimiento menosprecia a su prójimo.|Proverbios 11:12",
+                "En las muchas palabras no falta pecado; mas el que refrena sus labios es prudente.|Proverbios 10:19",
+                "Buscad la paz de la ciudad, porque en su paz tendréis vosotros paz.|Jeremías 29:7",
+                "Mirad que ninguno pague a otro mal por mal; antes seguid siempre lo bueno.|1 Tesalonicenses 5:15",
+                "El Señor es clemente y misericordioso, lento para la ira y grande en misericordia.|Salmo 145:8"
+            ],
+            ansioso: [
+                "No se preocupen por nada; en cambio, oren por todo. Díganle a Dios lo que necesitan.|Filipenses 4:6",
+                "No tengas miedo, porque yo estoy contigo; no te desalientes, porque yo soy tu Dios.|Isaías 41:10",
+                "Pongan todas sus preocupaciones y ansiedades en las manos de Dios, porque él cuida de ustedes.|1 Pedro 5:7",
+                "Así que no se preocupen por el mañana... Los problemas del día de hoy son suficientes por hoy.|Mateo 6:34",
+                "Les dejo un regalo: paz en la mente y en el corazón. Así que no se angustien ni tengan miedo.|Juan 14:27",
+                "Pero cuando tenga miedo, en ti pondré mi confianza.|Salmo 56:3",
+                "La preocupación agobia a la persona; una palabra de aliento la anima.|Proverbios 12:25",
+                "Levanto la vista hacia las montañas; ¿viene de allí mi ayuda? ¡Mi ayuda viene del Señor!|Salmo 121:1-2",
+                "Pues yo sé los planes que tengo para ustedes... Son planes para darles un futuro y una esperanza.|Jeremías 29:11",
+                "Dios es nuestro refugio y nuestra fuerza, siempre está dispuesto a ayudar en la dificultad.|Salmo 46:1",
+                "Mi mandato es: ¡Sé fuerte y valiente! No tengas miedo, porque el Señor tu Dios está contigo.|Josué 1:9",
+                "¡Tú guardarás en perfecta paz a todos los que confían en ti!|Isaías 26:3",
+                "Puedes irte a dormir sin miedo; te acostarás y dormirás profundamente.|Proverbios 3:24",
+                "Digan a los de corazón temeroso: Sean fuertes y no teman, porque su Dios viene para salvarlos.|Isaías 35:4",
+                "El Señor es mi luz y mi salvación, entonces ¿por qué habría de temer?|Salmo 27:1",
+                "Vengan a mí todos los que están cansados y llevan cargas pesadas, y yo les daré descanso.|Mateo 11:28",
+                "Si Dios está a favor de nosotros, ¿quién podrá ponerse en nuestra contra?|Romanos 8:31",
+                "En cambio, los que confían en el Señor encontrarán nuevas fuerzas; volarán como las águilas.|Isaías 40:31",
+                "Entrégale tus cargas al Señor, y él cuidará de ti; no permitirá que los justos tropiecen.|Salmo 55:22",
+                "Cuando la duda llenaba mi mente, tu consuelo renovó mi esperanza y mi alegría.|Salmo 94:19",
+                "El Señor peleará por vosotros, y vosotros estaréis tranquilos.|Éxodo 14:14",
+                "En paz me acostaré, y asimismo dormiré; porque solo tú, Señor, me haces vivir confiado.|Salmo 4:8",
+                "No se turbe vuestro corazón; creéis en Dios, creed también en mí.|Juan 14:1",
+                "Echando toda vuestra ansiedad sobre él, porque él tiene cuidado de vosotros.|1 Pedro 5:7",
+                "Por nada estéis afanosos, sino sean conocidas vuestras peticiones delante de Dios.|Filipenses 4:6",
+                "Y la paz de Dios, que sobrepasa todo entendimiento, guardará vuestros corazones.|Filipenses 4:7",
+                "A ti, Señor, levanto mi alma. Dios mío, en ti confío.|Salmo 25:1-2",
+                "Él da esfuerzo al cansado, y multiplica las fuerzas al que no tiene ningunas.|Isaías 40:29",
+                "Solo en Dios halla descanso mi alma; de él viene mi salvación.|Salmo 62:1",
+                "Aunque ande en valle de sombra de muerte, no temeré mal alguno, porque tú estarás conmigo.|Salmo 23:4",
+                "Busqué al Señor, y él me oyó, y me libró de todos mis temores.|Salmo 34:4",
+                "Dirige mis pasos por tu palabra, y que ninguna iniquidad me domine.|Salmo 119:133",
+                "Encomienda al Señor tu camino, y confía en él; y él hará.|Salmo 37:5",
+                "Mi porción es el Señor; por tanto, en él esperaré.|Lamentaciones 3:24",
+                "No temáis, manada pequeña, porque a vuestro Padre le ha placido daros el reino.|Lucas 12:32",
+                "Fíate del Señor de todo tu corazón, y no te apoyes en tu propia prudencia.|Proverbios 3:5",
+                "Buscad primeramente el reino de Dios y su justicia, y todas estas cosas os serán añadidas.|Mateo 6:33",
+                "Dios es nuestra amparo y fortaleza, nuestro pronto auxilio en las tribulaciones.|Salmo 46:1",
+                "Señor, ten misericordia de nosotros; a ti hemos esperado.|Isaías 33:2",
+                "Aguarda al Señor; esfuérzate, y aliéntese tu corazón.|Salmo 27:14",
+                "Los que confían en el Señor son como el monte de Sion, que no se mueve.|Salmo 125:1",
+                "Jehová es mi fortaleza y mi escudo; en él confió mi corazón, y fui ayudado.|Salmo 28:7",
+                "Con sus plumas te cubrirá, y debajo de sus alas estarás seguro.|Salmo 91:4",
+                "Mi Dios, pues, suplirá todo lo que os falta conforme a sus riquezas en gloria.|Filipenses 4:19",
+                "Porque no nos ha dado Dios espíritu de cobardía, sino de poder, de amor y de dominio propio.|2 Timoteo 1:7",
+                "He aquí, Dios es salvación mía; me aseguraré y no temeré.|Isaías 12:2",
+                "Sé para mí una roca de refugio, adonde recurra yo continuamente.|Salmo 71:3",
+                "Y sabemos que a los que aman a Dios, todas las cosas les ayudan a bien.|Romanos 8:28",
+                "La paz os dejo, mi paz os doy; yo no os la doy como el mundo la da.|Juan 14:27",
+                "Confiad en el Señor perpetuamente, porque en el Señor Dios está la fortaleza de los siglos.|Isaías 26:4"
+            ],
+            solitario: [
+                "El Señor está cerca de los que tienen quebrantado el corazón; él rescata a los de espíritu destrozado.|Salmo 34:18",
+                "Pues yo te sostengo de tu mano derecha: yo, el Señor tu Dios. Y te digo: No tengas miedo, aquí estoy.|Isaías 41:13",
+                "¡Así que sé fuerte y valiente! ... el Señor tu Dios, él mismo irá delante de ti. No te abandonará.|Deuteronomio 31:6",
+                "Y tengan por seguro esto: que estoy con ustedes siempre, hasta el fin de los tiempos.|Mateo 28:20",
+                "Aunque yo pase por el valle más oscuro, no temeré, porque tú estás a mi lado.|Salmo 23:4",
+                "Nunca te fallaré. Jamás te abandonaré.|Hebreos 13:5",
+                "Jamás podría escaparme de tu Espíritu; jamás podría huir de tu presencia...|Salmo 139:7",
+                "Cuando pases por aguas profundas, yo estaré contigo...|Isaías 43:2",
+                "Él nos consuela en todas nuestras dificultades para que nosotros podamos consolar a otros.|2 Corintios 1:4",
+                "Si subiera al cielo, allí estás tú; si tendiera mi lecho en el fondo del abismo, también estás allí.|Salmo 139:8",
+                "Dios es nuestro Padre misericordioso y la fuente de todo consuelo.|2 Corintios 1:3",
+                "¿Puede una madre olvidar a su niño de pecho? Pero aun si eso fuera posible, yo no te olvidaría.|Isaías 49:15",
+                "Aunque mi padre y mi madre me abandonen, el Señor me recibirá en sus brazos.|Salmo 27:10",
+                "Él sana a los quebrantados de corazón, y venda sus heridas.|Salmo 147:3",
+                "Cercano está el Señor a todos los que le invocan, a todos los que le invocan de veras.|Salmo 145:18",
+                "Míranos desde tu santa morada y bendice a tu pueblo.|Deuteronomio 26:15",
+                "No os dejaré huérfanos; vendré a vosotros.|Juan 14:18",
+                "En mi angustia invoqué al Señor, y clamé a mi Dios. Él oyó mi voz desde su templo.|Salmo 18:6",
+                "Yo estaré con vosotros todos los días, hasta el fin del mundo.|Mateo 28:20",
+                "Porque él me esconderá en su tabernáculo en el día del mal.|Salmo 27:5",
+                "El Señor es tu guardador; el Señor es tu sombra a tu mano derecha.|Salmo 121:5",
+                "Claman los justos, y el Señor oye, y los libra de todas sus angustias.|Salmo 34:17",
+                "Yo, yo soy vuestro consolador. ¿Quién eres tú para que tengas temor?|Isaías 51:12",
+                "Jehová está en medio de ti, poderoso, él salvará; se gozará sobre ti con alegría.|Sofonías 3:17",
+                "En el amor no hay temor, sino que el perfecto amor echa fuera el temor.|1 Juan 4:18",
+                "Porque tú has sido mi refugio, y torre fuerte delante del enemigo.|Salmo 61:3",
+                "Dirige tu rostro hacia mí y ten misericordia de mí, porque estoy solo y afligido.|Salmo 25:16",
+                "Porque el Señor tu Dios es Dios misericordioso; no te dejará, ni te destruirá.|Deuteronomio 4:31",
+                "Espera al Señor; esfuérzate y aliéntese tu corazón.|Salmo 27:14",
+                "El Señor es bueno, fortaleza en el día de la angustia; y conoce a los que en él confían.|Nahúm 1:7",
+                "Cuando clames a mí, yo te responderé.|Jeremías 33:3",
+                "He aquí, yo estoy a la puerta y llamo; si alguno oye mi voz y abre la puerta, entraré a él.|Apocalipsis 3:20",
+                "Y a los que a mí vienen, no los echo fuera.|Juan 6:37",
+                "¿A dónde me iré de tu Espíritu? ¿Y a dónde huiré de tu presencia?|Salmo 139:7",
+                "Pacientemente esperé a Jehová, y se inclinó a mí, y oyó mi clamor.|Salmo 40:1",
+                "Y él me dijo: Mi presencia irá contigo, y te daré descanso.|Éxodo 33:14",
+                "Tú eres mi escondedero; me guardarás de la angustia.|Salmo 32:7",
+                "Como pastor apacentará su rebaño; en su brazo llevará los corderos.|Isaías 40:11",
+                "Dios es el que me ciñe de poder, y quien hace perfecto mi camino.|Salmo 18:32",
+                "Pues el que me envió, conmigo está; no me ha dejado solo el Padre.|Juan 8:29",
+                "Mas tú, Señor, eres escudo alrededor de mí; mi gloria, y el que levanta mi cabeza.|Salmo 3:3",
+                "Desde el extremo de la tierra clamaré a ti, cuando mi corazón desmayare.|Salmo 61:2",
+                "Con amor eterno te he amado; por tanto, te prolongué mi misericordia.|Jeremías 31:3",
+                "Aun en la vejez, cuando ya peinen canas, yo seré el mismo, yo los sostendré.|Isaías 46:4",
+                "Porque a sus ángeles mandará acerca de ti, que te guarden en todos tus caminos.|Salmo 91:11",
+                "Me invocará, y yo le responderé; con él estaré yo en la angustia.|Salmo 91:15",
+                "¿Qué, pues, diremos a esto? Si Dios es por nosotros, ¿quién contra nosotros?|Romanos 8:31",
+                "Nada nos podrá separar del amor de Dios, que es en Cristo Jesús Señor nuestro.|Romanos 8:39",
+                "Sabiendo que la tribulación produce paciencia; y la paciencia, prueba; y la prueba, esperanza.|Romanos 5:3-4",
+                "Venid a mí todos los que estáis trabajados y cargados, y yo os haré descansar.|Mateo 11:28"
+            ],
+            triste: [
+                "Dios bendice a los que lloran, porque serán consolados.|Mateo 5:4",
+                "Él sana a los de corazón quebrantado y les venda las heridas.|Salmo 147:3",
+                "Aquí en el mundo tendrán muchas pruebas y tristezas; pero anímense, porque yo he vencido al mundo.|Juan 16:33",
+                "¿Por qué estoy desanimado? ¡Pondré mi esperanza en Dios! Nuevamente lo alabaré.|Salmo 42:11",
+                "Él les secará toda lágrima de los ojos, y no habrá más muerte ni tristeza ni llanto ni dolor.|Apocalipsis 21:4",
+                "El llanto podrá durar toda la noche, pero con la mañana llega la alegría.|Salmo 30:5",
+                "Él da poder a los indefensos y fortaleza a los débiles.|Isaías 40:29",
+                "Entrégale tus cargas al Señor, y él cuidará de ti.|Salmo 55:22",
+                "¡El fiel amor del Señor nunca se acaba! Sus misericordias son nuevas cada mañana.|Lamentaciones 3:22-23",
+                "Dios es nuestra fuente de todo consuelo. Él nos consuela en todas nuestras dificultades.|2 Corintios 1:3-4",
+                "Jehová es mi fortaleza y mi escudo; en él confió mi corazón, y fui ayudado.|Salmo 28:7",
+                "Bienaventurados los que lloran, porque ellos recibirán consolación.|Mateo 5:4",
+                "Mi carne y mi corazón desfallecen; mas la roca de mi corazón y mi porción es Dios para siempre.|Salmo 73:26",
+                "Tú llevarás mi dolor y sanarás mis heridas, Señor.|Jeremías 30:17",
+                "Como aquel a quien consuela su madre, así os consolaré yo a vosotros.|Isaías 66:13",
+                "En la multitud de mis pensamientos dentro de mí, tus consolaciones alegraban mi alma.|Salmo 94:19",
+                "Cercano está el Señor a los quebrantados de corazón.|Salmo 34:18",
+                "Ciertamente llevó él nuestras enfermedades, y sufrió nuestros dolores.|Isaías 53:4",
+                "Convertiré su lloro en gozo, y los consolaré, y los alegraré de su dolor.|Jeremías 31:13",
+                "No temas, porque yo estoy contigo; no desmayes, porque yo soy tu Dios que te esfuerzo.|Isaías 41:10",
+                "Aunque ande en valle de sombra de muerte, no temeré mal alguno.|Salmo 23:4",
+                "Él enjugará toda lágrima de sus ojos.|Apocalipsis 7:17",
+                "Los sacrificios de Dios son el espíritu quebrantado; al corazón contrito no despreciarás.|Salmo 51:17",
+                "Jehová, Dios de mi salvación, día y noche clamo delante de ti.|Salmo 88:1",
+                "Señor, sácame de la prisión de mi tristeza, para que alabe tu nombre.|Salmo 142:7",
+                "Ten misericordia de mí, oh Señor, porque estoy en angustia.|Salmo 31:9",
+                "Vuélvete a mí, y ten misericordia de mí, porque estoy solitario y afligido.|Salmo 25:16",
+                "Se secaron mis huesos a causa de mi gemido; pero tú, Señor, eres mi sanador.|Salmo 6:2-3",
+                "Las aguas me han rodeado hasta el alma; pero tú sacaste mi vida de la sepultura.|Jonás 2:5-6",
+                "En el día que temo, yo en ti confío.|Salmo 56:3",
+                "De la angustia invoqué a JAH, y me respondió JAH, poniéndome en lugar espacioso.|Salmo 118:5",
+                "El Señor es refugio del oprimido; refugio en tiempos de angustia.|Salmo 9:9",
+                "Dios es nuestro amparo y fortaleza, nuestro pronto auxilio en las tribulaciones.|Salmo 46:1",
+                "Tú, Señor, oíste el deseo de los humildes; tú confortarás su corazón.|Salmo 10:17",
+                "Porque no menospreció ni abominó la aflicción del afligido.|Salmo 22:24",
+                "Jehová sostendrá al enfermo en el lecho del dolor; ablandará su cama en la enfermedad.|Salmo 41:3",
+                "¿Por qué te abates, oh alma mía, y te turbas dentro de mí? Espera en Dios.|Salmo 42:5",
+                "Con mi voz clamé a Dios, a Dios clamé, y él me escuchará.|Salmo 77:1",
+                "En el día de mi angustia te llamaré, porque tú me respondes.|Salmo 86:7",
+                "Porque mi alma está hastiada de males, y mi vida cercana al Seol; pero tú, Dios, me darás vida.|Salmo 88:3",
+                "Este es mi consuelo en mi aflicción, que tu promesa me da vida.|Salmo 119:50",
+                "Acuérdate de la palabra dada a tu siervo, en la cual me has hecho esperar.|Salmo 119:49",
+                "Tú que me has hecho ver muchas angustias y males, volverás a darme vida.|Salmo 71:20",
+                "Sean, pues, aceptos los dichos de mi boca y la meditación de mi corazón delante de ti.|Salmo 19:14",
+                "Pacientemente esperé a Jehová, y se inclinó a mí, y oyó mi clamor.|Salmo 40:1",
+                "Y me hizo sacar del pozo de la desesperación, del lodo cenagoso.|Salmo 40:2",
+                "Puso luego en mi boca cántico nuevo, alabanza a nuestro Dios.|Salmo 40:3",
+                "Bienaventurado el hombre que puso en Jehová su confianza.|Salmo 40:4",
+                "Cantaré a Jehová mientras viva; a mi Dios cantaré salmos mientras exista.|Salmo 104:33",
+                "Dulce será mi meditación en él; yo me regocijaré en Jehová.|Salmo 104:34"
+            ]
+        };
+
+        function showVerse(emotion) {
+            // Seleccionar versículo aleatorio (de los 50 disponibles en la categoría)
+            const arrayVerses = versesData[emotion];
+            const randomIndex = Math.floor(Math.random() * arrayVerses.length);
+            
+            // Separar el texto del versículo de su referencia bíblica
+            const parts = arrayVerses[randomIndex].split('|');
+            const text = parts[0];
+            const ref = parts[1];
+
+            // Obtener la reflexión cálida correspondiente al sentimiento
+            const reflection = reflections[emotion];
+
+            // Actualizar el DOM (Agrandado con el CSS del 10%)
+            document.getElementById('verseText').innerText = `"${text}"`;
+            document.getElementById('verseRef').innerText = ref;
+            document.getElementById('reflectionText').innerText = reflection;
+            
+            // Mostrar la tarjeta y el footer
+            document.getElementById('verseCard').style.display = 'block';
+            document.getElementById('footerVerse').style.display = 'block';
+        }
+    </script>
+</body>
+</html>
