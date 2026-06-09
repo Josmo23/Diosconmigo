@@ -5,7 +5,6 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Dios Conmigo: Una Palabra de Aliento</title>
     <style>
-        /* Diseño Santo, de paz y tranquilidad */
         @import url('https://fonts.googleapis.com/css2?family=Lora:ital,wght@0,400;0,600;1,400&family=Montserrat:wght@300;400;500&display=swap');
 
         body {
@@ -22,42 +21,41 @@
 
         header {
             text-align: center;
-            padding: 40px 20px 20px;
+            padding: 44px 22px 22px; /* Aumentado 10% */
         }
 
         h1 {
             font-family: 'Lora', serif;
             color: #5d4037;
-            font-size: 2.5rem;
-            margin-bottom: 10px;
+            font-size: 2.75rem; /* Aumentado de 2.5 a 2.75 */
+            margin-bottom: 11px;
         }
 
         p.subtitle {
-            font-size: 1.1rem;
+            font-size: 1.21rem; /* Aumentado de 1.1 a 1.21 */
             color: #795548;
         }
 
         .container {
-            max-width: 800px;
+            max-width: 880px; /* Aumentado 10% */
             width: 90%;
             margin: 0 auto;
             text-align: center;
         }
 
-        /* Botones de Sentimientos */
         .emotions-grid {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(120px, 1fr));
-            gap: 15px;
-            margin-bottom: 40px;
+            grid-template-columns: repeat(auto-fit, minmax(132px, 1fr)); /* Aumentado 10% */
+            gap: 16px;
+            margin-bottom: 44px;
         }
 
         .btn-emotion {
             background-color: #ffffff;
             border: 2px solid #bcaaa4;
-            border-radius: 30px;
-            padding: 12px 20px;
-            font-size: 1rem;
+            border-radius: 33px;
+            padding: 13px 22px;
+            font-size: 1.1rem; /* Aumentado de 1 a 1.1 */
             font-family: 'Montserrat', sans-serif;
             color: #5d4037;
             cursor: pointer;
@@ -65,12 +63,101 @@
             box-shadow: 0 4px 6px rgba(0,0,0,0.05);
         }
 
-        .btn-emotion:hover {
-            background-color: #f5f5f5;
-            transform: translateY(-2px);
-            box-shadow: 0 6px 12px rgba(0,0,0,0.1);
+        .btn-feliz:hover { background-color: #ffcdd2; border-color: #ef9a9a; }
+        .btn-bendecido:hover { background-color: #fff9c4; border-color: #fff59d; }
+        .btn-enojado:hover { background-color: #ffccbc; border-color: #ffab91; }
+        .btn-ansioso:hover { background-color: #b2dfdb; border-color: #80cbc4; }
+        .btn-solitario:hover { background-color: #bbdefb; border-color: #90caf9; }
+        .btn-triste:hover { background-color: #e1bee7; border-color: #ce93d8; }
+
+        .verse-card {
+            background-color: #fffcf9;
+            border-radius: 16px;
+            padding: 44px;
+            box-shadow: 0 10px 25px rgba(0,0,0,0.08);
+            display: none; 
+            position: relative;
+            border-left: 8px solid #d7ccc8;
         }
 
-        /* Tarjeta del Versículo (Estilo Pergamino/Limpio) */
-        .verse-card {
-            background-color: #fffcf
+        .verse-text {
+            font-family: 'Lora', serif;
+            font-size: 1.54rem; /* Aumentado de 1.4 a 1.54 */
+            font-style: italic;
+            color: #4e342e;
+            margin-bottom: 16px;
+            line-height: 1.6;
+        }
+
+        .verse-ref {
+            font-weight: 600;
+            color: #795548;
+            margin-bottom: 33px;
+            font-size: 1.21rem; /* Aumentado de 1.1 a 1.21 */
+        }
+
+        .reflection-text {
+            font-size: 1.15rem; /* Aumentado de 1.05 a 1.15 */
+            color: #555;
+            line-height: 1.6;
+            margin-bottom: 10px;
+            border-top: 1px solid #efebe9;
+            padding-top: 22px;
+        }
+
+        .footer-verse {
+            margin-top: 44px;
+            font-family: 'Lora', serif;
+            color: #8d6e63;
+            font-size: 1rem; /* Aumentado de 0.9 a 1.0 */
+            text-align: center;
+            padding-bottom: 33px;
+        }
+    </style>
+</head>
+<body>
+
+    <header>
+        <h1>Dios Conmigo</h1>
+        <p class="subtitle">Una palabra de aliento para tu corazón</p>
+    </header>
+
+    <div class="container">
+        <p style="margin-bottom: 22px; font-size: 1.1rem; color: #5d4037;">¿Cómo te sientes en este momento?</p>
+        
+        <div class="emotions-grid">
+            <button class="btn-emotion btn-feliz" onclick="showVerse('feliz')">Feliz 😊</button>
+            <button class="btn-emotion btn-bendecido" onclick="showVerse('bendecido')">Bendecido 🙏</button>
+            <button class="btn-emotion btn-enojado" onclick="showVerse('enojado')">Enojado 😡</button>
+            <button class="btn-emotion btn-ansioso" onclick="showVerse('ansioso')">Ansioso 😟</button>
+            <button class="btn-emotion btn-solitario" onclick="showVerse('solitario')">Solitario 😔</button>
+            <button class="btn-emotion btn-triste" onclick="showVerse('triste')">Triste 😢</button>
+        </div>
+
+        <div class="verse-card" id="verseCard">
+            <div class="verse-text" id="verseText">"..."</div>
+            <div class="verse-ref" id="verseRef">...</div>
+            <div class="reflection-text" id="reflectionText">...</div>
+        </div>
+    </div>
+
+    <div class="footer-verse" id="footerVerse" style="display: none;">
+        "Tu palabra es una lámpara que guía mis pies y una luz para mi camino" (Salmos 119:105).<br><br>
+        <strong>¿Deseas leer otra palabra de aliento o descansar en Su paz?</strong>
+    </div>
+
+    <script>
+        // Funciones auxiliares para generar variaciones de versículos y completar los 50 por categoría.
+        // Debido al volumen, combinamos versículos literales con promesas bíblicas directas sobre el sentimiento.
+        
+        const db = {
+            feliz: {
+                reflection: "Dios se regocija inmensamente en tu alegría. Reconocer que cada momento de felicidad es un regalo Suyo nos permite vivir con un corazón plenamente agradecido. Celebra hoy Su bondad y descansa en Su amor.",
+                verses: [
+                    { text: "Este es el día que el Señor ha hecho. ¡Nos alegraremos y regocijaremos en él!", ref: "Salmo 118:24" },
+                    { text: "Estén siempre llenos de alegría en el Señor. Lo repito, ¡alégrense!", ref: "Filipenses 4:4" },
+                    { text: "Nos llenamos de risa y cantamos de alegría.", ref: "Salmo 126:2" },
+                    { text: "Me mostrarás el camino de la vida; me concederás la alegría de tu presencia.", ref: "Salmo 16:11" },
+                    { text: "Les he dicho estas cosas para que se llenen de mi gozo; así es, desbordarán de gozo.", ref: "Juan 15:11" },
+                    { text: "El corazón contento alegra el rostro.", ref: "Proverbios 15:13" },
+                    { text: "Tú cambiaste mi duelo en alegre danza: me quitaste la ropa de luto y me vestiste de alegría.", ref: "Salmo 30:11" },
