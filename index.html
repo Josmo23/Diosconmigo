@@ -2,17 +2,23 @@
 <html lang="es">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Dios Conmigo: Una Palabra de Aliento</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+    <title>Dios Conmigo | Palabra de Aliento Cristiana</title>
     <style>
-        @import url('https://fonts.googleapis.com/css2?family=Lora:ital,wght@0,400;0,600;1,400&family=Montserrat:wght@300;400;500&display=swap');
+        @import url('https://fonts.googleapis.com/css2?family=Cinzel:wght@400;600;700&family=Open+Sans:ital,wght@0,300;0,400;0,600;1,300;1,400&display=swap');
 
-        body {
+        * {
             margin: 0;
             padding: 0;
-            font-family: 'Montserrat', sans-serif;
-            background: linear-gradient(135deg, #e0f2f1 0%, #fff8e1 100%);
-            color: #333;
+            box-sizing: border-box;
+        }
+
+        body {
+            background: #fbf7e9;
+            background-image: radial-gradient(circle at 10% 20%, rgba(210, 180, 140, 0.08) 2%, transparent 2.5%);
+            background-size: 28px 28px;
+            font-family: 'Open Sans', sans-serif;
+            color: #2c2418;
             min-height: 100vh;
             display: flex;
             flex-direction: column;
@@ -21,278 +27,421 @@
 
         header {
             text-align: center;
-            padding: 44px 22px 22px;
+            padding: 2rem 1.5rem 1rem;
+            background: linear-gradient(135deg, #2e1e0f 0%, #4a2e1a 100%);
+            width: 100%;
+            box-shadow: 0 8px 20px rgba(0,0,0,0.1);
+            border-bottom: 3px solid #d4af37;
         }
 
         h1 {
-            font-family: 'Lora', serif;
-            color: #5d4037;
-            font-size: 2.75rem; 
-            margin-bottom: 11px;
+            font-family: 'Cinzel', serif;
+            font-weight: 700;
+            font-size: 2.6rem;
+            color: #f9e5b3;
+            text-shadow: 2px 2px 0px #5a3e2b;
+            letter-spacing: 2px;
         }
 
-        p.subtitle {
-            font-size: 1.21rem; 
-            color: #795548;
-        }
-
-        /* --- ESTILOS DE LA PANTALLA DE ACCESO (PAYWALL) --- */
-        #paywall-container {
-            background-color: #fffcf9;
-            border-radius: 16px;
-            padding: 44px;
-            box-shadow: 0 10px 25px rgba(0,0,0,0.08);
-            max-width: 500px;
-            width: 90%;
-            text-align: center;
-            border-top: 8px solid #bcaaa4;
-            margin-top: 20px;
-        }
-
-        #paywall-container h2 {
-            font-family: 'Lora', serif;
-            color: #4e342e;
-            margin-top: 0;
-        }
-
-        .btn-ingreso {
-            background-color: #5d4037;
-            color: white;
-            padding: 15px 30px;
-            border-radius: 30px;
-            font-weight: 500;
+        .subtitle {
             font-size: 1.2rem;
-            text-decoration: none;
-            display: inline-block;
-            margin-top: 20px;
-            box-shadow: 0 4px 10px rgba(0,0,0,0.2);
-            transition: transform 0.3s ease;
-        }
-
-        .btn-ingreso:hover {
-            transform: scale(1.05);
-            background-color: #795548;
-        }
-
-        .multiplique-text {
-            font-size: 0.85rem;
-            color: #795548;
-            display: block;
+            color: #ecd9b4;
             font-style: italic;
-            margin-top: 12px;
+            font-weight: 300;
+            margin-top: 0.3rem;
         }
 
-        /* --- ESTILOS DEL CONTENIDO PRINCIPAL --- */
-        #main-content {
-            display: none; /* Oculto por defecto */
-            width: 100%;
+        .main-container {
+            max-width: 980px;
+            width: 92%;
+            margin: 2rem auto;
+            background: rgba(255, 252, 240, 0.85);
+            border-radius: 32px;
+            box-shadow: 0 20px 35px rgba(45, 30, 20, 0.2);
+            backdrop-filter: blur(1px);
+            padding: 1.8rem;
+            border: 1px solid #e2cfaa;
         }
 
-        .container {
-            max-width: 880px; 
-            width: 90%;
-            margin: 0 auto;
+        .daily-verse {
+            background: #2b2b1f;
+            background: linear-gradient(115deg, #2f261b 0%, #1f1a10 100%);
+            border-radius: 28px;
+            padding: 1.6rem 1.2rem;
+            margin-bottom: 2.2rem;
             text-align: center;
+            border-left: 10px solid #dbb42c;
+            box-shadow: 0 8px 14px rgba(0,0,0,0.15);
+        }
+
+        .daily-verse p {
+            color: #fef0cf;
+            font-size: 1.2rem;
+        }
+
+        .daily-verse .small-ref {
+            font-family: 'Cinzel', serif;
+            color: #e9c468;
+            margin-top: 0.6rem;
+            font-weight: 600;
+        }
+
+        .daily-label {
+            font-size: 0.85rem;
+            letter-spacing: 2px;
+            text-transform: uppercase;
+            background: #dbb42c;
+            display: inline-block;
+            padding: 0.2rem 1.2rem;
+            border-radius: 50px;
+            color: #2b1f12;
+            font-weight: bold;
+            margin-bottom: 0.8rem;
+        }
+
+        .question {
+            font-size: 1.4rem;
+            font-weight: 600;
+            color: #5a3e2b;
+            text-align: center;
+            margin: 1.5rem 0 1rem;
+            font-family: 'Cinzel', serif;
         }
 
         .emotions-grid {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(132px, 1fr)); 
-            gap: 16px;
-            margin-bottom: 44px;
+            grid-template-columns: repeat(auto-fit, minmax(130px, 1fr));
+            gap: 14px;
+            margin: 1.8rem 0 2rem;
         }
 
         .btn-emotion {
-            background-color: #ffffff;
-            border: 2px solid #bcaaa4;
-            border-radius: 33px;
-            padding: 13px 22px;
-            font-size: 1.1rem; 
-            font-family: 'Montserrat', sans-serif;
-            color: #5d4037;
+            background: #fff8e7;
+            border: 2px solid #c6aa76;
+            border-radius: 60px;
+            padding: 12px 10px;
+            font-weight: 600;
+            font-family: 'Open Sans', sans-serif;
+            color: #4b351f;
             cursor: pointer;
-            transition: all 0.3s ease;
-            box-shadow: 0 4px 6px rgba(0,0,0,0.05);
+            transition: all 0.2s ease;
+            box-shadow: 0 2px 6px rgba(0,0,0,0.05);
+            font-size: 1rem;
         }
 
-        .btn-feliz:hover { background-color: #ffcdd2; border-color: #ef9a9a; }
-        .btn-bendecido:hover { background-color: #fff9c4; border-color: #fff59d; }
-        .btn-enojado:hover { background-color: #ffccbc; border-color: #ffab91; }
-        .btn-ansioso:hover { background-color: #b2dfdb; border-color: #80cbc4; }
-        .btn-solitario:hover { background-color: #bbdefb; border-color: #90caf9; }
-        .btn-triste:hover { background-color: #e1bee7; border-color: #ce93d8; }
+        .btn-emotion:hover {
+            transform: translateY(-3px);
+            background: #f7e9d3;
+            border-color: #a67c4b;
+            box-shadow: 0 8px 16px rgba(100, 60, 20, 0.15);
+        }
 
         .verse-card {
-            background-color: #fffcf9;
-            border-radius: 16px;
-            padding: 44px;
-            box-shadow: 0 10px 25px rgba(0,0,0,0.08);
-            display: none; 
-            position: relative;
-            border-left: 8px solid #d7ccc8;
+            background: #fffcf2;
+            border-radius: 32px;
+            padding: 2rem 1.8rem;
+            margin: 1.8rem 0;
+            box-shadow: 0 15px 25px rgba(0,0,0,0.08);
+            border-top: 5px solid #b8860b;
+            display: none;
+            transition: all 0.4s ease;
         }
 
         .verse-text {
-            font-family: 'Lora', serif;
-            font-size: 1.54rem; 
+            font-family: 'Cinzel', serif;
+            font-size: 1.6rem;
             font-style: italic;
-            color: #4e342e;
-            margin-bottom: 16px;
-            line-height: 1.6;
+            color: #3b2a1c;
+            line-height: 1.4;
+            text-align: center;
         }
 
         .verse-ref {
-            font-weight: 600;
-            color: #795548;
-            margin-bottom: 33px;
-            font-size: 1.21rem; 
+            font-weight: 700;
+            color: #8b5a2b;
+            margin: 1rem 0 1.5rem;
+            font-size: 1.1rem;
+            text-align: center;
+            letter-spacing: 1px;
         }
 
         .reflection-text {
-            font-size: 1.15rem; 
-            color: #555;
+            font-size: 1.1rem;
+            color: #3e3024;
             line-height: 1.6;
-            margin-bottom: 10px;
-            border-top: 1px solid #efebe9;
-            padding-top: 22px;
+            border-top: 1px solid #ecd9b4;
+            padding-top: 1.5rem;
+            margin-top: 0.5rem;
         }
 
-        .footer-verse {
-            margin-top: 44px;
-            font-family: 'Lora', serif;
-            color: #8d6e63;
-            font-size: 1rem; 
+        .action-buttons {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            gap: 15px;
+            margin: 25px 0 10px;
+        }
+
+        .btn-secondary {
+            background: #2f4f2f;
+            border: none;
+            color: white;
+            padding: 10px 24px;
+            border-radius: 40px;
+            font-weight: 600;
+            cursor: pointer;
+            font-family: 'Open Sans', sans-serif;
+            transition: 0.2s;
+            box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+        }
+
+        .btn-secondary i {
+            margin-right: 6px;
+        }
+
+        .btn-secondary:hover {
+            background: #3e6b3e;
+            transform: scale(1.02);
+        }
+
+        .btn-gold {
+            background: #dbb42c;
+            color: #2c1b0c;
+            border: none;
+        }
+
+        .btn-gold:hover {
+            background: #c9a32b;
+        }
+
+        .prayer-counter {
+            background: #efe5d4;
+            border-radius: 50px;
+            padding: 5px 20px;
+            display: inline-flex;
+            align-items: center;
+            gap: 12px;
+            font-weight: 600;
+            margin: 10px 0;
+        }
+
+        .donation-section {
+            background: #f3ecd9;
+            border-radius: 28px;
+            padding: 1.5rem;
+            margin-top: 2.3rem;
             text-align: center;
-            padding-bottom: 33px;
+            border: 1px solid #e2cd9c;
+        }
+
+        .donation-title {
+            font-family: 'Cinzel', serif;
+            color: #5b3e22;
+            font-size: 1.3rem;
+        }
+
+        .btn-donation {
+            background: #7c5f3a;
+            color: white;
+            padding: 12px 30px;
+            border-radius: 50px;
+            font-weight: bold;
+            text-decoration: none;
+            display: inline-block;
+            margin: 12px 0 8px;
+            transition: 0.2s;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.2);
+        }
+
+        .btn-donation:hover {
+            background: #9c784c;
+            transform: scale(1.02);
+        }
+
+        .small-italic {
+            font-size: 0.8rem;
+            color: #836e4a;
+        }
+
+        footer {
+            text-align: center;
+            padding: 2rem 1rem;
+            color: #5b4a33;
+            font-size: 0.8rem;
+            border-top: 1px solid #e2cfaa;
+            width: 100%;
+            margin-top: 1rem;
         }
     </style>
 </head>
 <body>
 
-    <header>
-        <h1>Dios Conmigo</h1>
-        <p class="subtitle">Una palabra de aliento para tu corazón</p>
-    </header>
+<header>
+    <h1>✝️ Dios Conmigo</h1>
+    <p class="subtitle">"Él es tu refugio y fortaleza" — Salmos 91:2</p>
+</header>
 
-    <div id="paywall-container">
-        <h2>Bienvenido</h2>
-        <p style="color: #555; line-height: 1.5;">Para poder acceder a las reflexiones y palabras de aliento, te pedimos una aportación de acceso.</p>
-        
-        <a href="https://mpago.la/2N9G7Kp" target="_blank" class="btn-ingreso" onclick="unlockMenu()">Cooperar $100 y Entrar</a>
-        <span class="multiplique-text">que Dios te multiplique</span>
-        
-        <p style="font-size: 0.85rem; color: #999; margin-top: 25px;">(Al hacer clic se abrirá Mercado Pago y el menú se desbloqueará en esta ventana).</p>
+<div class="main-container">
+    <div class="daily-verse" id="dailyVerseBox">
+        <div class="daily-label">Hoy Dios te recuerda</div>
+        <p id="dailyVerseText">"El Señor es mi luz y mi salvación, ¿de quién temeré?"</p>
+        <div class="small-ref" id="dailyVerseRef">Salmo 27:1</div>
     </div>
 
-    <div id="main-content">
-        <div class="container">
-            <p style="margin-bottom: 22px; font-size: 1.21rem; color: #5d4037;">¿Cómo te sientes en este momento?</p>
-            
-            <div class="emotions-grid">
-                <button class="btn-emotion btn-feliz" onclick="showVerse('feliz')">Feliz 😊</button>
-                <button class="btn-emotion btn-bendecido" onclick="showVerse('bendecido')">Bendecido 🙏</button>
-                <button class="btn-emotion btn-enojado" onclick="showVerse('enojado')">Enojado 😡</button>
-                <button class="btn-emotion btn-ansioso" onclick="showVerse('ansioso')">Ansioso 😟</button>
-                <button class="btn-emotion btn-solitario" onclick="showVerse('solitario')">Solitario 😔</button>
-                <button class="btn-emotion btn-triste" onclick="showVerse('triste')">Triste 😢</button>
-            </div>
-
-            <div class="verse-card" id="verseCard">
-                <div class="verse-text" id="verseText">"..."</div>
-                <div class="verse-ref" id="verseRef">...</div>
-                <div class="reflection-text" id="reflectionText">...</div>
-            </div>
-        </div>
-
-        <div class="footer-verse" id="footerVerse" style="display: none;">
-            "Tu palabra es una lámpara que guía mis pies y una luz para mi camino" (Salmos 119:105).<br><br>
-            <strong>¿Deseas leer otra palabra de aliento o descansar en Su paz?</strong>
-        </div>
+    <div class="question">¿Cómo te sientes en este momento? 💙</div>
+    <div class="emotions-grid">
+        <button class="btn-emotion" onclick="showVerse('feliz')">😊 Feliz</button>
+        <button class="btn-emotion" onclick="showVerse('bendecido')">🙏 Bendecido</button>
+        <button class="btn-emotion" onclick="showVerse('enojado')">😡 Enojado</button>
+        <button class="btn-emotion" onclick="showVerse('ansioso')">😟 Ansioso</button>
+        <button class="btn-emotion" onclick="showVerse('solitario')">😔 Solitario</button>
+        <button class="btn-emotion" onclick="showVerse('triste')">😢 Triste</button>
     </div>
 
-    <script>
-        // Función para desbloquear el menú
-        function unlockMenu() {
-            // Damos un pequeño retraso (1 segundo) para que la pestaña de pago se abra primero
-            setTimeout(() => {
-                document.getElementById('paywall-container').style.display = 'none';
-                document.getElementById('main-content').style.display = 'block';
-            }, 1000);
+    <div class="verse-card" id="verseCard">
+        <div class="verse-text" id="verseText">"..."</div>
+        <div class="verse-ref" id="verseRef">📖 ...</div>
+        <div class="reflection-text" id="reflectionText">...</div>
+        
+        <div class="action-buttons">
+            <button class="btn-secondary" id="shareBtn" onclick="shareVerse()">📱 Compartir por WhatsApp</button>
+            <button class="btn-secondary btn-gold" id="prayBtn" onclick="addPrayer()">🙏 Orar ahora</button>
+        </div>
+        <div class="prayer-counter" id="prayerCounterDisplay">🕯️ Oraciones unidas: <span id="prayCount">128</span></div>
+    </div>
+
+    <!-- DONACIÓN VOLUNTARIA con mensaje de agradecimiento -->
+    <div class="donation-section">
+        <div class="donation-title">🌸 Donación voluntaria</div>
+        <p>Si este ministerio ha sido de bendición para tu vida y deseas apoyar el sustento de esta página, puedes hacer una <strong>donación voluntaria</strong>. No es obligatorio, el amor de Dios es gratuito.</p>
+        <a href="https://mpago.la/2N9G7Kp" target="_blank" class="btn-donation" id="donationBtn">🤲 Donar (Mercado Pago)</a>
+        <div class="small-italic">“Dios ama al dador alegre” — 2 Corintios 9:7</div>
+    </div>
+</div>
+
+<footer>
+    ❝ Tu palabra es una lámpara que guía mis pies y una luz para mi camino ❞ — Salmos 119:105 <br>
+    <span style="font-size: 0.7rem;">Dios te ama y está contigo hoy y siempre.</span>
+</footer>
+
+<script>
+    const versesData = {
+        feliz: [
+            "Este es el día que el Señor ha hecho. ¡Nos alegraremos y regocijaremos en él!|Salmo 118:24",
+            "Estén siempre llenos de alegría en el Señor. Lo repito, ¡alégrense!|Filipenses 4:4",
+            "Nos llenamos de risa y cantamos de alegría.|Salmo 126:2",
+            "Me mostrarás el camino de la vida; me concederás la alegría de tu presencia.|Salmo 16:11",
+            "La alegría del Señor es nuestra fuerza.|Nehemías 8:10"
+        ],
+        bendecido: [
+            "Todo lo que es bueno y perfecto es un regalo que desciende a nosotros de parte de Dios.|Santiago 1:17",
+            "Bendice, alma mía, al Señor y no olvides ninguno de sus beneficios.|Salmo 103:2",
+            "Entren por sus puertas con acción de gracias... Denle gracias y alaben su nombre.|Salmo 100:4",
+            "Bendito el hombre que confía en el Señor.|Jeremías 17:7",
+            "Dios nos ha bendecido con toda bendición espiritual en Cristo.|Efesios 1:3"
+        ],
+        enojado: [
+            "No pequen al dejar que el enojo los controle. No permitan que el sol se ponga mientras siguen enojados.|Efesios 4:26",
+            "La respuesta apacible desvía el enojo, pero las palabras ásperas encienden los ánimos.|Proverbios 15:1",
+            "Sean rápidos para oír, lentos para hablar, lentos para airarse.|Santiago 1:19",
+            "El que es lento para la ira tiene gran entendimiento.|Proverbios 14:29",
+            "No seas vencido por el mal, sino vence el mal con el bien.|Romanos 12:21"
+        ],
+        ansioso: [
+            "No se preocupen por nada; en cambio, oren por todo. Díganle a Dios lo que necesitan.|Filipenses 4:6",
+            "No temas, porque yo estoy contigo; no desmayes, porque yo soy tu Dios.|Isaías 41:10",
+            "Echando toda vuestra ansiedad sobre Él, porque Él tiene cuidado de vosotros.|1 Pedro 5:7",
+            "Así que no os afanéis por el día de mañana.|Mateo 6:34",
+            "La paz de Dios, que sobrepasa todo entendimiento, guardará vuestros corazones.|Filipenses 4:7"
+        ],
+        solitario: [
+            "El Señor está cerca de los quebrantados de corazón; salva a los de espíritu abatido.|Salmo 34:18",
+            "No temas, porque yo te sostengo con mi diestra justa.|Isaías 41:13",
+            "Él mismo ha dicho: No te dejaré ni te abandonaré.|Hebreos 13:5",
+            "Yo estaré contigo siempre, hasta el fin del mundo.|Mateo 28:20",
+            "Aunque ande en valle de sombra de muerte, no temeré mal alguno, porque tú estarás conmigo.|Salmo 23:4"
+        ],
+        triste: [
+            "Bienaventurados los que lloran, porque ellos recibirán consolación.|Mateo 5:4",
+            "Él sana a los quebrantados de corazón y venda sus heridas.|Salmo 147:3",
+            "En el mundo tendréis aflicción; pero confiad, yo he vencido al mundo.|Juan 16:33",
+            "¿Por qué te abates, oh alma mía? Espera en Dios, porque aún he de alabarle.|Salmo 42:11",
+            "El llanto puede durar una noche, pero la alegría viene en la mañana.|Salmo 30:5"
+        ]
+    };
+
+    const reflections = {
+        feliz: "Dios se regocija con tu alegría. Cada sonrisa es un reflejo de su gracia. Celebra su bondad y comparte esa felicidad, porque el gozo del Señor renueva nuestras fuerzas.",
+        bendecido: "Reconocer Sus bendiciones nos llena de asombro. No lo olvides: todo don perfecto viene de lo alto. Vive en gratitud y extiende la bendición a otros.",
+        enojado: "El enojo no es malo si no te domina. Entrega esa ira a Dios, pídele calma y sabiduría. Él te enseñará a responder con amor, incluso en la tormenta.",
+        ansioso: "Dios conoce cada una de tus preocupaciones. Respira profundo, suelta ese peso en sus manos. Él tiene el control de tu mañana. Descansa en su paz.",
+        solitario: "No estás solo aunque el silencio sea grande. Dios está a tu lado, escucha tu suspiro. Permítele abrazarte, Él nunca te abandona.",
+        triste: "Tus lágrimas son valiosas para Dios. Él está cerca, consuela y restaura. Permítele sanar tu corazón, la esperanza volverá a florecer."
+    };
+
+    function showVerse(emotion) {
+        const versesArray = versesData[emotion];
+        const randomIndex = Math.floor(Math.random() * versesArray.length);
+        const parts = versesArray[randomIndex].split('|');
+        const verseText = parts[0];
+        const verseRef = parts[1];
+        const reflectionText = reflections[emotion];
+        
+        document.getElementById('verseText').innerHTML = `“${verseText}”`;
+        document.getElementById('verseRef').innerHTML = `📖 ${verseRef}`;
+        document.getElementById('reflectionText').innerHTML = reflectionText;
+        document.getElementById('verseCard').style.display = 'block';
+        
+        window.currentVerseForShare = `${verseText} (${verseRef})`;
+        document.getElementById('verseCard').scrollIntoView({ behavior: 'smooth', block: 'start' });
+    }
+    
+    let prayerCount = localStorage.getItem('prayerCount') ? parseInt(localStorage.getItem('prayerCount')) : 128;
+    document.getElementById('prayCount').innerText = prayerCount;
+    
+    function addPrayer() {
+        prayerCount++;
+        localStorage.setItem('prayerCount', prayerCount);
+        document.getElementById('prayCount').innerText = prayerCount;
+        alert("🙌 Gracias por unirte en oración. Dios escucha tu clamor.");
+    }
+    
+    function shareVerse() {
+        if (!window.currentVerseForShare) {
+            alert("Selecciona primero una emoción para recibir un versículo.");
+            return;
         }
-
-        // Reflexiones por sentimiento
-        const reflections = {
-            feliz: "Dios se regocija inmensamente en tu alegría. Reconocer que cada momento de felicidad es un regalo Suyo nos permite vivir con un corazón plenamente agradecido. Celebra hoy Su bondad.",
-            bendecido: "Reconocer las bendiciones de Dios nos llena de humildad y asombro. Disfruta de Su provisión y Su inmenso amor, sabiendo que Él cuida, nutre y orquesta cada detalle hermoso de tu vida.",
-            enojado: "Comprendemos que duele, y es válido sentir enojo, pero no permitas que este abrume tu corazón. Dios te invita a buscar refugio en Su calma. Respira y entrégale esa carga; Él te dará paz.",
-            ansioso: "Te escuchamos y abrazamos tu inquietud. Pero no tienes que llevar esa pesada carga solo. Cierra los ojos y entrega tus ansiedades a Dios ahora mismo. Él ya está en tu mañana cuidando de ti.",
-            solitario: "Aunque el silencio parezca grande y sientas que no hay nadie, no estás solo. Dios está sentado a tu lado en este mismo instante, abrazando cada pedazo de tu corazón. Él nunca te abandonará.",
-            triste: "Sabemos que el dolor pesa profundo en tu interior. Dios guarda con mucho amor cada una de tus lágrimas. En medio de tu tristeza, Él es tu consuelo. Confía en que Su alegría volverá a florecer."
-        };
-
-        // Base de datos de versículos
-        const versesData = {
-            feliz: [
-                "Este es el día que el Señor ha hecho. ¡Nos alegraremos y regocijaremos en él!|Salmo 118:24",
-                "Estén siempre llenos de alegría en el Señor. Lo repito, ¡alégrense!|Filipenses 4:4",
-                "Nos llenamos de risa y cantamos de alegría.|Salmo 126:2",
-                "Me mostrarás el camino de la vida; me concederás la alegría de tu presencia.|Salmo 16:11",
-                "Les he dicho estas cosas para que se llenen de mi gozo; así es, desbordarán de gozo.|Juan 15:11"
-            ],
-            bendecido: [
-                "Todo lo que es bueno y perfecto es un regalo que desciende a nosotros de parte de Dios.|Santiago 1:17",
-                "Que todo lo que soy alabe al Señor; que nunca olvide todas las cosas buenas que hace por mí.|Salmo 103:2",
-                "Entren por sus puertas con acción de gracias... Denle gracias y alaben su nombre.|Salmo 100:4",
-                "Toda la alabanza sea para Dios... quien nos ha bendecido con toda clase de bendiciones.|Efesios 1:3",
-                "Sean agradecidos en toda circunstancia, pues esta es la voluntad de Dios.|1 Tesalonicenses 5:18"
-            ],
-            enojado: [
-                "No pequen al dejar que el enojo los controle. No permitan que el sol se ponga mientras siguen enojados.|Efesios 4:26",
-                "La respuesta apacible desvía el enojo, pero las palabras ásperas encienden los ánimos.|Proverbios 15:1",
-                "Todos ustedes deben ser rápidos para escuchar, lentos para hablar y lentos para enojarse.|Santiago 1:19",
-                "Los que tienen entendimiento no pierden los estribos; los que se enojan fácilmente demuestran gran necedad.|Proverbios 14:29",
-                "No dejen que el mal los venza, más bien venzan el mal haciendo el bien.|Romanos 12:21"
-            ],
-            ansioso: [
-                "No se preocupen por nada; en cambio, oren por todo. Díganle a Dios lo que necesitan.|Filipenses 4:6",
-                "No tengas miedo, porque yo estoy contigo; no te desalientes, porque yo soy tu Dios.|Isaías 41:10",
-                "Pongan todas sus preocupaciones y ansiedades en las manos de Dios, porque él cuida de ustedes.|1 Pedro 5:7",
-                "Así que no se preocupen por el mañana... Los problemas del día de hoy son suficientes por hoy.|Mateo 6:34",
-                "Les dejo un regalo: paz en la mente y en el corazón. Así que no se angustien ni tengan miedo.|Juan 14:27"
-            ],
-            solitario: [
-                "El Señor está cerca de los que tienen quebrantado el corazón; él rescata a los de espíritu destrozado.|Salmo 34:18",
-                "Pues yo te sostengo de tu mano derecha: yo, el Señor tu Dios. Y te digo: No tengas miedo, aquí estoy.|Isaías 41:13",
-                "¡Así que sé fuerte y valiente! ... el Señor tu Dios, él mismo irá delante de ti. No te abandonará.|Deuteronomio 31:6",
-                "Y tengan por seguro esto: que estoy con ustedes siempre, hasta el fin de los tiempos.|Mateo 28:20",
-                "Aunque yo pase por el valle más oscuro, no temeré, porque tú estás a mi lado.|Salmo 23:4"
-            ],
-            triste: [
-                "Dios bendice a los que lloran, porque serán consolados.|Mateo 5:4",
-                "Él sana a los de corazón quebrantado y les venda las heridas.|Salmo 147:3",
-                "Aquí en el mundo tendrán muchas pruebas y tristezas; pero anímense, porque yo he vencido al mundo.|Juan 16:33",
-                "¿Por qué estoy desanimado? ¡Pondré mi esperanza en Dios! Nuevamente lo alabaré.|Salmo 42:11",
-                "El llanto podrá durar toda la noche, pero con la mañana llega la alegría.|Salmo 30:5"
-            ]
-        };
-
-        function showVerse(emotion) {
-            const arrayVerses = versesData[emotion];
-            const randomIndex = Math.floor(Math.random() * arrayVerses.length);
-            
-            const parts = arrayVerses[randomIndex].split('|');
-            const text = parts[0];
-            const ref = parts[1];
-
-            const reflection = reflections[emotion];
-
-            document.getElementById('verseText').innerText = `"${text}"`;
-            document.getElementById('verseRef').innerText = ref;
-            document.getElementById('reflectionText').innerText = reflection;
-            
-            document.getElementById('verseCard').style.display = 'block';
-            document.getElementById('footerVerse').style.display = 'block';
-        }
-    </script>
+        const message = `🕊️ *Dios Conmigo*: ${window.currentVerseForShare}\n\n"El Señor me da fuerzas. Comparte esta palabra de aliento. 🙏`;
+        const url = `https://wa.me/?text=${encodeURIComponent(message)}`;
+        window.open(url, '_blank');
+    }
+    
+    const dailyVerses = [
+        "No temas, porque yo estoy contigo; no desmayes, porque yo soy tu Dios que te esfuerzo.|Isaías 41:10",
+        "Porque yo sé los planes que tengo para ustedes, planes de bienestar y no de calamidad, para darles un futuro y una esperanza.|Jeremías 29:11",
+        "Todo lo puedo en Cristo que me fortalece.|Filipenses 4:13",
+        "El Señor es mi pastor, nada me faltará.|Salmo 23:1",
+        "Venid a mí todos los que estáis cansados y cargados, y yo os haré descansar.|Mateo 11:28",
+        "Grande es tu fidelidad, oh Señor.|Lamentaciones 3:23",
+        "El amor de Dios ha sido derramado en nuestros corazones.|Romanos 5:5"
+    ];
+    
+    function setDailyVerse() {
+        const randomDaily = dailyVerses[Math.floor(Math.random() * dailyVerses.length)];
+        const [text, ref] = randomDaily.split('|');
+        document.getElementById('dailyVerseText').innerText = `“${text}”`;
+        document.getElementById('dailyVerseRef').innerHTML = `✨ ${ref}`;
+    }
+    setDailyVerse();
+    
+    // Función para mostrar mensaje de agradecimiento al hacer clic en donar
+    const donationBtn = document.getElementById('donationBtn');
+    donationBtn.addEventListener('click', function(e) {
+        // Mostrar mensaje de que gracias a su donativo llegaremos a más personas
+        alert("¡Gracias por tu generosidad! Gracias a tu donativo, llegaremos a más personas con el mensaje de Dios.");
+        // Permitir que el enlace se abra normalmente
+        // No se previene el comportamiento por defecto, así que se abre el link de Mercado Pago
+    });
+</script>
 </body>
 </html>
