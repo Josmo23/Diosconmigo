@@ -32,6 +32,29 @@
             width: 100%;
             box-shadow: 0 8px 20px rgba(0,0,0,0.1);
             border-bottom: 3px solid #d4af37;
+            position: relative;
+        }
+
+        .language-switch {
+            position: absolute;
+            top: 1rem;
+            right: 1.5rem;
+            background: #dbb42c;
+            border: none;
+            border-radius: 30px;
+            padding: 6px 16px;
+            font-weight: bold;
+            color: #2b1f12;
+            cursor: pointer;
+            font-family: 'Open Sans', sans-serif;
+            transition: 0.2s;
+            font-size: 0.9rem;
+            box-shadow: 0 2px 6px rgba(0,0,0,0.1);
+        }
+
+        .language-switch:hover {
+            background: #c9a32b;
+            transform: scale(1.02);
         }
 
         h1 {
@@ -240,6 +263,14 @@
             font-size: 1.3rem;
         }
 
+        .donation-buttons {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            gap: 20px;
+            margin: 15px 0;
+        }
+
         .btn-donation {
             background: #7c5f3a;
             color: white;
@@ -247,10 +278,14 @@
             border-radius: 50px;
             font-weight: bold;
             text-decoration: none;
-            display: inline-block;
-            margin: 12px 0 8px;
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
             transition: 0.2s;
             box-shadow: 0 2px 8px rgba(0,0,0,0.2);
+            border: none;
+            cursor: pointer;
+            font-size: 1rem;
         }
 
         .btn-donation:hover {
@@ -272,30 +307,50 @@
             width: 100%;
             margin-top: 1rem;
         }
+
+        @media (max-width: 600px) {
+            .language-switch {
+                top: 0.5rem;
+                right: 0.8rem;
+                padding: 4px 12px;
+                font-size: 0.8rem;
+            }
+            h1 {
+                font-size: 1.8rem;
+            }
+            .verse-text {
+                font-size: 1.3rem;
+            }
+            .donation-buttons {
+                flex-direction: column;
+                align-items: center;
+            }
+        }
     </style>
 </head>
 <body>
 
 <header>
-    <h1>✝️ Dios Conmigo</h1>
-    <p class="subtitle">"Él es tu refugio y fortaleza" — Salmos 91:2</p>
+    <button id="languageToggle" class="language-switch">English</button>
+    <h1>✝️ <span id="siteTitle">Dios Conmigo</span></h1>
+    <p class="subtitle" id="siteSubtitle">"Él es tu refugio y fortaleza" — Salmos 91:2</p>
 </header>
 
 <div class="main-container">
     <div class="daily-verse" id="dailyVerseBox">
-        <div class="daily-label">Hoy Dios te recuerda</div>
+        <div class="daily-label" id="dailyLabel">Hoy Dios te recuerda</div>
         <p id="dailyVerseText">"El Señor es mi luz y mi salvación, ¿de quién temeré?"</p>
         <div class="small-ref" id="dailyVerseRef">Salmo 27:1</div>
     </div>
 
-    <div class="question">¿Cómo te sientes en este momento? 💙</div>
+    <div class="question" id="questionText">¿Cómo te sientes en este momento? 💙</div>
     <div class="emotions-grid">
-        <button class="btn-emotion" onclick="showVerse('feliz')">😊 Feliz</button>
-        <button class="btn-emotion" onclick="showVerse('bendecido')">🙏 Bendecido</button>
-        <button class="btn-emotion" onclick="showVerse('enojado')">😡 Enojado</button>
-        <button class="btn-emotion" onclick="showVerse('ansioso')">😟 Ansioso</button>
-        <button class="btn-emotion" onclick="showVerse('solitario')">😔 Solitario</button>
-        <button class="btn-emotion" onclick="showVerse('triste')">😢 Triste</button>
+        <button class="btn-emotion" data-emotion="feliz" data-emotion-en="happy" onclick="showVerse('feliz')"><span class="emotion-text">😊 Feliz</span></button>
+        <button class="btn-emotion" data-emotion="bendecido" data-emotion-en="blessed" onclick="showVerse('bendecido')"><span class="emotion-text">🙏 Bendecido</span></button>
+        <button class="btn-emotion" data-emotion="enojado" data-emotion-en="angry" onclick="showVerse('enojado')"><span class="emotion-text">😡 Enojado</span></button>
+        <button class="btn-emotion" data-emotion="ansioso" data-emotion-en="anxious" onclick="showVerse('ansioso')"><span class="emotion-text">😟 Ansioso</span></button>
+        <button class="btn-emotion" data-emotion="solitario" data-emotion-en="lonely" onclick="showVerse('solitario')"><span class="emotion-text">😔 Solitario</span></button>
+        <button class="btn-emotion" data-emotion="triste" data-emotion-en="sad" onclick="showVerse('triste')"><span class="emotion-text">😢 Triste</span></button>
     </div>
 
     <div class="verse-card" id="verseCard">
@@ -304,88 +359,237 @@
         <div class="reflection-text" id="reflectionText">...</div>
         
         <div class="action-buttons">
-            <button class="btn-secondary" id="shareBtn" onclick="shareVerse()">📱 Compartir por WhatsApp</button>
-            <button class="btn-secondary btn-gold" id="prayBtn" onclick="addPrayer()">🙏 Orar ahora</button>
+            <button class="btn-secondary" id="shareBtn" onclick="shareVerse()"><span id="shareText">📱 Compartir por WhatsApp</span></button>
+            <button class="btn-secondary btn-gold" id="prayBtn" onclick="addPrayer()"><span id="prayNowText">🙏 Orar ahora</span></button>
         </div>
-        <div class="prayer-counter" id="prayerCounterDisplay">🕯️ Oraciones unidas: <span id="prayCount">128</span></div>
+        <div class="prayer-counter" id="prayerCounterDisplay">🕯️ <span id="prayersLabel">Oraciones unidas</span>: <span id="prayCount">128</span></div>
     </div>
 
-    <!-- DONACIÓN VOLUNTARIA con mensaje de agradecimiento -->
+    <!-- DONACIONES VOLUNTARIAS: Mercado Pago (nuevo link) y Binance -->
     <div class="donation-section">
-        <div class="donation-title">🌸 Donación voluntaria</div>
-        <p>Si este ministerio ha sido de bendición para tu vida y deseas apoyar el sustento de esta página, puedes hacer una <strong>donación voluntaria</strong>. No es obligatorio, el amor de Dios es gratuito.</p>
-        <a href="https://mpago.la/2N9G7Kp" target="_blank" class="btn-donation" id="donationBtn">🤲 Donar (Mercado Pago)</a>
-        <div class="small-italic">“Dios ama al dador alegre” — 2 Corintios 9:7</div>
+        <div class="donation-title" id="donationTitle">🌸 Donación voluntaria</div>
+        <p id="donationText">Si este ministerio ha sido de bendición para tu vida y deseas apoyar el sustento de esta página, puedes hacer una <strong>donación voluntaria</strong>. No es obligatorio, el amor de Dios es gratuito.</p>
+        <div class="donation-buttons">
+            <a href="https://link.mercadopago.com.mx/herramientaslaser" target="_blank" class="btn-donation" id="mercadopagoBtn">🤲 Donar con Mercado Pago</a>
+            <a href="https://s.binance.com/elIqQ1jM" target="_blank" class="btn-donation" id="binanceBtn">🪙 Donar con Binance</a>
+        </div>
+        <div class="small-italic" id="donationVerse">“Dios ama al dador alegre” — 2 Corintios 9:7</div>
     </div>
 </div>
 
-<footer>
-    ❝ Tu palabra es una lámpara que guía mis pies y una luz para mi camino ❞ — Salmos 119:105 <br>
-    <span style="font-size: 0.7rem;">Dios te ama y está contigo hoy y siempre.</span>
+<footer id="footer">
+    ❝ <span id="footerVerse">Tu palabra es una lámpara que guía mis pies y una luz para mi camino</span> ❞ — <span id="footerRef">Salmos 119:105</span> <br>
+    <span id="footerLove" style="font-size: 0.7rem;">Dios te ama y está contigo hoy y siempre.</span>
 </footer>
 
 <script>
-    const versesData = {
-        feliz: [
-            "Este es el día que el Señor ha hecho. ¡Nos alegraremos y regocijaremos en él!|Salmo 118:24",
-            "Estén siempre llenos de alegría en el Señor. Lo repito, ¡alégrense!|Filipenses 4:4",
-            "Nos llenamos de risa y cantamos de alegría.|Salmo 126:2",
-            "Me mostrarás el camino de la vida; me concederás la alegría de tu presencia.|Salmo 16:11",
-            "La alegría del Señor es nuestra fuerza.|Nehemías 8:10"
-        ],
-        bendecido: [
-            "Todo lo que es bueno y perfecto es un regalo que desciende a nosotros de parte de Dios.|Santiago 1:17",
-            "Bendice, alma mía, al Señor y no olvides ninguno de sus beneficios.|Salmo 103:2",
-            "Entren por sus puertas con acción de gracias... Denle gracias y alaben su nombre.|Salmo 100:4",
-            "Bendito el hombre que confía en el Señor.|Jeremías 17:7",
-            "Dios nos ha bendecido con toda bendición espiritual en Cristo.|Efesios 1:3"
-        ],
-        enojado: [
-            "No pequen al dejar que el enojo los controle. No permitan que el sol se ponga mientras siguen enojados.|Efesios 4:26",
-            "La respuesta apacible desvía el enojo, pero las palabras ásperas encienden los ánimos.|Proverbios 15:1",
-            "Sean rápidos para oír, lentos para hablar, lentos para airarse.|Santiago 1:19",
-            "El que es lento para la ira tiene gran entendimiento.|Proverbios 14:29",
-            "No seas vencido por el mal, sino vence el mal con el bien.|Romanos 12:21"
-        ],
-        ansioso: [
-            "No se preocupen por nada; en cambio, oren por todo. Díganle a Dios lo que necesitan.|Filipenses 4:6",
-            "No temas, porque yo estoy contigo; no desmayes, porque yo soy tu Dios.|Isaías 41:10",
-            "Echando toda vuestra ansiedad sobre Él, porque Él tiene cuidado de vosotros.|1 Pedro 5:7",
-            "Así que no os afanéis por el día de mañana.|Mateo 6:34",
-            "La paz de Dios, que sobrepasa todo entendimiento, guardará vuestros corazones.|Filipenses 4:7"
-        ],
-        solitario: [
-            "El Señor está cerca de los quebrantados de corazón; salva a los de espíritu abatido.|Salmo 34:18",
-            "No temas, porque yo te sostengo con mi diestra justa.|Isaías 41:13",
-            "Él mismo ha dicho: No te dejaré ni te abandonaré.|Hebreos 13:5",
-            "Yo estaré contigo siempre, hasta el fin del mundo.|Mateo 28:20",
-            "Aunque ande en valle de sombra de muerte, no temeré mal alguno, porque tú estarás conmigo.|Salmo 23:4"
-        ],
-        triste: [
-            "Bienaventurados los que lloran, porque ellos recibirán consolación.|Mateo 5:4",
-            "Él sana a los quebrantados de corazón y venda sus heridas.|Salmo 147:3",
-            "En el mundo tendréis aflicción; pero confiad, yo he vencido al mundo.|Juan 16:33",
-            "¿Por qué te abates, oh alma mía? Espera en Dios, porque aún he de alabarle.|Salmo 42:11",
-            "El llanto puede durar una noche, pero la alegría viene en la mañana.|Salmo 30:5"
-        ]
+    // ----------------------------- DATOS BILINGÜES ---------------------------------
+    const texts = {
+        es: {
+            siteTitle: "Dios Conmigo",
+            siteSubtitle: '"Él es tu refugio y fortaleza" — Salmos 91:2',
+            dailyLabel: "Hoy Dios te recuerda",
+            question: "¿Cómo te sientes en este momento? 💙",
+            shareText: "📱 Compartir por WhatsApp",
+            prayNowText: "🙏 Orar ahora",
+            prayersLabel: "Oraciones unidas",
+            donationTitle: "🌸 Donación voluntaria",
+            donationText: "Si este ministerio ha sido de bendición para tu vida y deseas apoyar el sustento de esta página, puedes hacer una <strong>donación voluntaria</strong>. No es obligatorio, el amor de Dios es gratuito.",
+            donationVerse: "“Dios ama al dador alegre” — 2 Corintios 9:7",
+            footerVerse: "Tu palabra es una lámpara que guía mis pies y una luz para mi camino",
+            footerRef: "Salmos 119:105",
+            footerLove: "Dios te ama y está contigo hoy y siempre.",
+            mpBtn: "🤲 Donar con Mercado Pago",
+            binanceBtn: "🪙 Donar con Binance",
+            emotions: {
+                feliz: "😊 Feliz",
+                bendecido: "🙏 Bendecido",
+                enojado: "😡 Enojado",
+                ansioso: "😟 Ansioso",
+                solitario: "😔 Solitario",
+                triste: "😢 Triste"
+            },
+            prayerAlert: "🙌 Gracias por unirte en oración. Dios escucha tu clamor.",
+            shareAlert: "Selecciona primero una emoción para recibir un versículo.",
+            donationAlert: "¡Gracias por tu generosidad! Gracias a tu donativo, llegaremos a más personas con el mensaje de Dios."
+        },
+        en: {
+            siteTitle: "God With Me",
+            siteSubtitle: '"He is your refuge and strength" — Psalm 91:2',
+            dailyLabel: "Today God reminds you",
+            question: "How are you feeling right now? 💙",
+            shareText: "📱 Share on WhatsApp",
+            prayNowText: "🙏 Pray now",
+            prayersLabel: "Prayers united",
+            donationTitle: "🌸 Voluntary Donation",
+            donationText: "If this ministry has been a blessing to your life and you wish to support this page, you can make a <strong>voluntary donation</strong>. It is not mandatory, God's love is free.",
+            donationVerse: "“God loves a cheerful giver” — 2 Corinthians 9:7",
+            footerVerse: "Your word is a lamp to guide my feet and a light for my path",
+            footerRef: "Psalm 119:105",
+            footerLove: "God loves you and is with you today and always.",
+            mpBtn: "🤲 Donate with Mercado Pago",
+            binanceBtn: "🪙 Donate with Binance",
+            emotions: {
+                feliz: "😊 Happy",
+                bendecido: "🙏 Blessed",
+                enojado: "😡 Angry",
+                ansioso: "😟 Anxious",
+                solitario: "😔 Lonely",
+                triste: "😢 Sad"
+            },
+            prayerAlert: "🙌 Thank you for joining in prayer. God hears your cry.",
+            shareAlert: "First select an emotion to receive a verse.",
+            donationAlert: "Thank you for your generosity! Thanks to your donation, we will reach more people with God's message."
+        }
     };
 
-    const reflections = {
-        feliz: "Dios se regocija con tu alegría. Cada sonrisa es un reflejo de su gracia. Celebra su bondad y comparte esa felicidad, porque el gozo del Señor renueva nuestras fuerzas.",
-        bendecido: "Reconocer Sus bendiciones nos llena de asombro. No lo olvides: todo don perfecto viene de lo alto. Vive en gratitud y extiende la bendición a otros.",
-        enojado: "El enojo no es malo si no te domina. Entrega esa ira a Dios, pídele calma y sabiduría. Él te enseñará a responder con amor, incluso en la tormenta.",
-        ansioso: "Dios conoce cada una de tus preocupaciones. Respira profundo, suelta ese peso en sus manos. Él tiene el control de tu mañana. Descansa en su paz.",
-        solitario: "No estás solo aunque el silencio sea grande. Dios está a tu lado, escucha tu suspiro. Permítele abrazarte, Él nunca te abandona.",
-        triste: "Tus lágrimas son valiosas para Dios. Él está cerca, consuela y restaura. Permítele sanar tu corazón, la esperanza volverá a florecer."
+    const reflectionsData = {
+        es: {
+            feliz: "Dios se regocija con tu alegría. Cada sonrisa es un reflejo de su gracia. Celebra su bondad y comparte esa felicidad, porque el gozo del Señor renueva nuestras fuerzas.",
+            bendecido: "Reconocer Sus bendiciones nos llena de asombro. No lo olvides: todo don perfecto viene de lo alto. Vive en gratitud y extiende la bendición a otros.",
+            enojado: "El enojo no es malo si no te domina. Entrega esa ira a Dios, pídele calma y sabiduría. Él te enseñará a responder con amor, incluso en la tormenta.",
+            ansioso: "Dios conoce cada una de tus preocupaciones. Respira profundo, suelta ese peso en sus manos. Él tiene el control de tu mañana. Descansa en su paz.",
+            solitario: "No estás solo aunque el silencio sea grande. Dios está a tu lado, escucha tu suspiro. Permítele abrazarte, Él nunca te abandona.",
+            triste: "Tus lágrimas son valiosas para Dios. Él está cerca, consuela y restaura. Permítele sanar tu corazón, la esperanza volverá a florecer."
+        },
+        en: {
+            feliz: "God rejoices in your joy. Every smile is a reflection of His grace. Celebrate His goodness and share that happiness, for the joy of the Lord is your strength.",
+            bendecido: "Recognizing His blessings fills us with awe. Do not forget: every good gift comes from above. Live in gratitude and extend the blessing to others.",
+            enojado: "Anger is not bad if it does not dominate you. Give that anger to God, ask for calm and wisdom. He will teach you to respond with love, even in the storm.",
+            ansioso: "God knows all your worries. Breathe deeply, release that burden into His hands. He is in control of your tomorrow. Rest in His peace.",
+            solitario: "You are not alone even if the silence is great. God is by your side, He hears your sigh. Let Him embrace you, He will never leave you.",
+            triste: "Your tears are valuable to God. He is near, He comforts and restores. Let Him heal your heart, hope will bloom again."
+        }
     };
+
+    const versesData = {
+        es: {
+            feliz: [
+                "Este es el día que el Señor ha hecho. ¡Nos alegraremos y regocijaremos en él!|Salmo 118:24",
+                "Estén siempre llenos de alegría en el Señor. Lo repito, ¡alégrense!|Filipenses 4:4",
+                "Nos llenamos de risa y cantamos de alegría.|Salmo 126:2",
+                "Me mostrarás el camino de la vida; me concederás la alegría de tu presencia.|Salmo 16:11",
+                "La alegría del Señor es nuestra fuerza.|Nehemías 8:10"
+            ],
+            bendecido: [
+                "Todo lo que es bueno y perfecto es un regalo que desciende a nosotros de parte de Dios.|Santiago 1:17",
+                "Bendice, alma mía, al Señor y no olvides ninguno de sus beneficios.|Salmo 103:2",
+                "Entren por sus puertas con acción de gracias... Denle gracias y alaben su nombre.|Salmo 100:4",
+                "Bendito el hombre que confía en el Señor.|Jeremías 17:7",
+                "Dios nos ha bendecido con toda bendición espiritual en Cristo.|Efesios 1:3"
+            ],
+            enojado: [
+                "No pequen al dejar que el enojo los controle. No permitan que el sol se ponga mientras siguen enojados.|Efesios 4:26",
+                "La respuesta apacible desvía el enojo, pero las palabras ásperas encienden los ánimos.|Proverbios 15:1",
+                "Sean rápidos para oír, lentos para hablar, lentos para airarse.|Santiago 1:19",
+                "El que es lento para la ira tiene gran entendimiento.|Proverbios 14:29",
+                "No seas vencido por el mal, sino vence el mal con el bien.|Romanos 12:21"
+            ],
+            ansioso: [
+                "No se preocupen por nada; en cambio, oren por todo. Díganle a Dios lo que necesitan.|Filipenses 4:6",
+                "No temas, porque yo estoy contigo; no desmayes, porque yo soy tu Dios.|Isaías 41:10",
+                "Echando toda vuestra ansiedad sobre Él, porque Él tiene cuidado de vosotros.|1 Pedro 5:7",
+                "Así que no os afanéis por el día de mañana.|Mateo 6:34",
+                "La paz de Dios, que sobrepasa todo entendimiento, guardará vuestros corazones.|Filipenses 4:7"
+            ],
+            solitario: [
+                "El Señor está cerca de los quebrantados de corazón; salva a los de espíritu abatido.|Salmo 34:18",
+                "No temas, porque yo te sostengo con mi diestra justa.|Isaías 41:13",
+                "Él mismo ha dicho: No te dejaré ni te abandonaré.|Hebreos 13:5",
+                "Yo estaré contigo siempre, hasta el fin del mundo.|Mateo 28:20",
+                "Aunque ande en valle de sombra de muerte, no temeré mal alguno, porque tú estarás conmigo.|Salmo 23:4"
+            ],
+            triste: [
+                "Bienaventurados los que lloran, porque ellos recibirán consolación.|Mateo 5:4",
+                "Él sana a los quebrantados de corazón y venda sus heridas.|Salmo 147:3",
+                "En el mundo tendréis aflicción; pero confiad, yo he vencido al mundo.|Juan 16:33",
+                "¿Por qué te abates, oh alma mía? Espera en Dios, porque aún he de alabarle.|Salmo 42:11",
+                "El llanto puede durar una noche, pero la alegría viene en la mañana.|Salmo 30:5"
+            ]
+        },
+        en: {
+            feliz: [
+                "This is the day the Lord has made; let us rejoice and be glad in it.|Psalm 118:24",
+                "Rejoice in the Lord always. I will say it again: Rejoice!|Philippians 4:4",
+                "Our mouths were filled with laughter, our tongues with songs of joy.|Psalm 126:2",
+                "You make known to me the path of life; you will fill me with joy in your presence.|Psalm 16:11",
+                "The joy of the Lord is your strength.|Nehemiah 8:10"
+            ],
+            bendecido: [
+                "Every good and perfect gift is from above, coming down from the Father of lights.|James 1:17",
+                "Praise the Lord, my soul, and forget not all his benefits.|Psalm 103:2",
+                "Enter his gates with thanksgiving and his courts with praise; give thanks to him and praise his name.|Psalm 100:4",
+                "Blessed is the man who trusts in the Lord.|Jeremiah 17:7",
+                "God has blessed us with every spiritual blessing in Christ.|Ephesians 1:3"
+            ],
+            enojado: [
+                "In your anger do not sin. Do not let the sun go down while you are still angry.|Ephesians 4:26",
+                "A gentle answer turns away wrath, but a harsh word stirs up anger.|Proverbs 15:1",
+                "Everyone should be quick to listen, slow to speak and slow to become angry.|James 1:19",
+                "Whoever is slow to anger has great understanding.|Proverbs 14:29",
+                "Do not be overcome by evil, but overcome evil with good.|Romans 12:21"
+            ],
+            ansioso: [
+                "Do not be anxious about anything, but in every situation, by prayer and petition, present your requests to God.|Philippians 4:6",
+                "Do not fear, for I am with you; do not be dismayed, for I am your God.|Isaiah 41:10",
+                "Cast all your anxiety on him because he cares for you.|1 Peter 5:7",
+                "Therefore do not worry about tomorrow, for tomorrow will worry about itself.|Matthew 6:34",
+                "The peace of God, which transcends all understanding, will guard your hearts and your minds in Christ Jesus.|Philippians 4:7"
+            ],
+            solitario: [
+                "The Lord is close to the brokenhearted and saves those who are crushed in spirit.|Psalm 34:18",
+                "Do not fear, for I myself uphold you with my righteous right hand.|Isaiah 41:13",
+                "God has said: Never will I leave you; never will I forsake you.|Hebrews 13:5",
+                "Surely I am with you always, to the very end of the age.|Matthew 28:20",
+                "Even though I walk through the darkest valley, I will fear no evil, for you are with me.|Psalm 23:4"
+            ],
+            triste: [
+                "Blessed are those who mourn, for they will be comforted.|Matthew 5:4",
+                "He heals the brokenhearted and binds up their wounds.|Psalm 147:3",
+                "In this world you will have trouble. But take heart! I have overcome the world.|John 16:33",
+                "Why, my soul, are you downcast? Put your hope in God.|Psalm 42:11",
+                "Weeping may stay for the night, but rejoicing comes in the morning.|Psalm 30:5"
+            ]
+        }
+    };
+
+    let currentLang = 'es';
+
+    function updateStaticTexts() {
+        const t = texts[currentLang];
+        document.getElementById('siteTitle').innerText = t.siteTitle;
+        document.getElementById('siteSubtitle').innerText = t.siteSubtitle;
+        document.getElementById('dailyLabel').innerText = t.dailyLabel;
+        document.getElementById('questionText').innerHTML = t.question;
+        document.getElementById('shareText').innerText = t.shareText;
+        document.getElementById('prayNowText').innerText = t.prayNowText;
+        document.getElementById('prayersLabel').innerHTML = t.prayersLabel;
+        document.getElementById('donationTitle').innerText = t.donationTitle;
+        document.getElementById('donationText').innerHTML = t.donationText;
+        document.getElementById('donationVerse').innerHTML = t.donationVerse;
+        document.getElementById('footerVerse').innerHTML = t.footerVerse;
+        document.getElementById('footerRef').innerHTML = t.footerRef;
+        document.getElementById('footerLove').innerHTML = t.footerLove;
+        document.getElementById('mercadopagoBtn').innerHTML = t.mpBtn;
+        document.getElementById('binanceBtn').innerHTML = t.binanceBtn;
+        
+        const emotionButtons = document.querySelectorAll('.btn-emotion');
+        emotionButtons.forEach(btn => {
+            const emotionKey = btn.getAttribute('data-emotion');
+            const span = btn.querySelector('.emotion-text');
+            if (span && t.emotions[emotionKey]) {
+                span.innerHTML = t.emotions[emotionKey];
+            }
+        });
+    }
 
     function showVerse(emotion) {
-        const versesArray = versesData[emotion];
+        const versesArray = versesData[currentLang][emotion];
         const randomIndex = Math.floor(Math.random() * versesArray.length);
         const parts = versesArray[randomIndex].split('|');
         const verseText = parts[0];
         const verseRef = parts[1];
-        const reflectionText = reflections[emotion];
+        const reflectionText = reflectionsData[currentLang][emotion];
         
         document.getElementById('verseText').innerHTML = `“${verseText}”`;
         document.getElementById('verseRef').innerHTML = `📖 ${verseRef}`;
@@ -395,7 +599,7 @@
         window.currentVerseForShare = `${verseText} (${verseRef})`;
         document.getElementById('verseCard').scrollIntoView({ behavior: 'smooth', block: 'start' });
     }
-    
+
     let prayerCount = localStorage.getItem('prayerCount') ? parseInt(localStorage.getItem('prayerCount')) : 128;
     document.getElementById('prayCount').innerText = prayerCount;
     
@@ -403,45 +607,83 @@
         prayerCount++;
         localStorage.setItem('prayerCount', prayerCount);
         document.getElementById('prayCount').innerText = prayerCount;
-        alert("🙌 Gracias por unirte en oración. Dios escucha tu clamor.");
+        alert(texts[currentLang].prayerAlert);
     }
     
     function shareVerse() {
         if (!window.currentVerseForShare) {
-            alert("Selecciona primero una emoción para recibir un versículo.");
+            alert(texts[currentLang].shareAlert);
             return;
         }
-        const message = `🕊️ *Dios Conmigo*: ${window.currentVerseForShare}\n\n"El Señor me da fuerzas. Comparte esta palabra de aliento. 🙏`;
+        const message = `🕊️ *Dios Conmigo*: ${window.currentVerseForShare}\n\n${currentLang === 'es' ? 'El Señor me da fuerzas. Comparte esta palabra de aliento. 🙏' : 'The Lord gives me strength. Share this word of encouragement. 🙏'}`;
         const url = `https://wa.me/?text=${encodeURIComponent(message)}`;
         window.open(url, '_blank');
     }
-    
-    const dailyVerses = [
-        "No temas, porque yo estoy contigo; no desmayes, porque yo soy tu Dios que te esfuerzo.|Isaías 41:10",
-        "Porque yo sé los planes que tengo para ustedes, planes de bienestar y no de calamidad, para darles un futuro y una esperanza.|Jeremías 29:11",
-        "Todo lo puedo en Cristo que me fortalece.|Filipenses 4:13",
-        "El Señor es mi pastor, nada me faltará.|Salmo 23:1",
-        "Venid a mí todos los que estáis cansados y cargados, y yo os haré descansar.|Mateo 11:28",
-        "Grande es tu fidelidad, oh Señor.|Lamentaciones 3:23",
-        "El amor de Dios ha sido derramado en nuestros corazones.|Romanos 5:5"
-    ];
+
+    const dailyVerses = {
+        es: [
+            "No temas, porque yo estoy contigo; no desmayes, porque yo soy tu Dios que te esfuerzo.|Isaías 41:10",
+            "Porque yo sé los planes que tengo para ustedes, planes de bienestar y no de calamidad, para darles un futuro y una esperanza.|Jeremías 29:11",
+            "Todo lo puedo en Cristo que me fortalece.|Filipenses 4:13",
+            "El Señor es mi pastor, nada me faltará.|Salmo 23:1",
+            "Venid a mí todos los que estáis cansados y cargados, y yo os haré descansar.|Mateo 11:28",
+            "Grande es tu fidelidad, oh Señor.|Lamentaciones 3:23",
+            "El amor de Dios ha sido derramado en nuestros corazones.|Romanos 5:5"
+        ],
+        en: [
+            "Do not fear, for I am with you; do not be dismayed, for I am your God who strengthens you.|Isaiah 41:10",
+            "For I know the plans I have for you, plans to prosper you and not to harm you, plans to give you hope and a future.|Jeremiah 29:11",
+            "I can do everything through Christ who strengthens me.|Philippians 4:13",
+            "The Lord is my shepherd, I lack nothing.|Psalm 23:1",
+            "Come to me, all you who are weary and burdened, and I will give you rest.|Matthew 11:28",
+            "Great is your faithfulness, O Lord.|Lamentations 3:23",
+            "God's love has been poured out into our hearts.|Romans 5:5"
+        ]
+    };
     
     function setDailyVerse() {
-        const randomDaily = dailyVerses[Math.floor(Math.random() * dailyVerses.length)];
+        const versesList = dailyVerses[currentLang];
+        const randomDaily = versesList[Math.floor(Math.random() * versesList.length)];
         const [text, ref] = randomDaily.split('|');
         document.getElementById('dailyVerseText').innerText = `“${text}”`;
         document.getElementById('dailyVerseRef').innerHTML = `✨ ${ref}`;
     }
-    setDailyVerse();
     
-    // Función para mostrar mensaje de agradecimiento al hacer clic en donar
-    const donationBtn = document.getElementById('donationBtn');
-    donationBtn.addEventListener('click', function(e) {
-        // Mostrar mensaje de que gracias a su donativo llegaremos a más personas
-        alert("¡Gracias por tu generosidad! Gracias a tu donativo, llegaremos a más personas con el mensaje de Dios.");
-        // Permitir que el enlace se abra normalmente
-        // No se previene el comportamiento por defecto, así que se abre el link de Mercado Pago
+    function setLanguage(lang) {
+        currentLang = lang;
+        updateStaticTexts();
+        setDailyVerse();
+        const toggleBtn = document.getElementById('languageToggle');
+        if (currentLang === 'es') {
+            toggleBtn.innerText = 'English';
+        } else {
+            toggleBtn.innerText = 'Español';
+        }
+        document.getElementById('verseCard').style.display = 'none';
+        window.currentVerseForShare = null;
+    }
+    
+    document.getElementById('languageToggle').addEventListener('click', () => {
+        const newLang = currentLang === 'es' ? 'en' : 'es';
+        setLanguage(newLang);
     });
+    
+    function setupDonationAlerts() {
+        const mpBtn = document.getElementById('mercadopagoBtn');
+        const binanceBtn = document.getElementById('binanceBtn');
+        
+        const showThanks = () => {
+            alert(texts[currentLang].donationAlert);
+        };
+        
+        mpBtn.addEventListener('click', showThanks);
+        binanceBtn.addEventListener('click', showThanks);
+    }
+    
+    setDailyVerse();
+    updateStaticTexts();
+    setupDonationAlerts();
+    document.getElementById('languageToggle').innerText = 'English';
 </script>
 </body>
 </html>
